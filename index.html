@@ -73,6 +73,7 @@
     }
     .pre-center {
       position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+      display:flex; flex-direction:column; align-items:center; gap:16px;
     }
     .pre-counter {
       font-family: var(--display);
@@ -81,9 +82,9 @@
       line-height:1; letter-spacing:-.02em; color:var(--paper);
       opacity:0; animation: fi .5s .3s forwards;
     }
-    .pre-bottom { display:flex; justify-content:space-between; align-items:flex-end; }
+    .pre-bottom { display:flex; align-items:flex-end; }
     .pre-bar-wrap {
-      flex:1; height:1px; background:rgba(15,15,13,0.12); margin-right:32px; overflow:hidden;
+      flex:1; height:1px; background:rgba(15,15,13,0.12); overflow:hidden;
       opacity:0; animation: fi .4s .3s forwards;
     }
     .pre-bar-fill { height:100%; width:0%; background:var(--paper); transition:width .05s linear; }
@@ -105,7 +106,7 @@
     /* NAV */
     nav {
       position:fixed; top:0; left:0; right:0; height:var(--nav-h);
-      display:flex; align-items:center; justify-content:space-between;
+      display:flex; align-items:center; justify-content:center;
       padding:0 48px; z-index:300;
       border-bottom: 1px solid var(--rule);
       background: rgba(249,250,244,0.92);
@@ -115,22 +116,23 @@
       font-family: var(--helvetica); font-size:13px; font-weight:700;
       letter-spacing:.18em; text-transform:uppercase; color:var(--paper); cursor:none; user-select:none;
       text-decoration:none;
+      position: absolute; left: 48px;
     }
-    .nav-links { display:flex; gap:40px; list-style:none; }
+    .nav-links { display:flex; gap:0; list-style:none; border:1px solid var(--rule); }
     .nav-links a {
       font-family: var(--helvetica); font-size:10px; font-weight:500;
       letter-spacing:.18em; text-transform:uppercase; color:var(--mid);
-      text-decoration:none; cursor:none; transition:color .2s; position:relative;
+      text-decoration:none; cursor:none; transition:color .2s, background .2s;
+      padding: 8px 22px; display:block;
+      border-right: 1px solid var(--rule);
     }
-    .nav-links a::after {
-      content:''; position:absolute; bottom:-3px; left:0;
-      width:0; height:1px; background:var(--paper);
-      transition:width .3s var(--ease);
+    .nav-links li:last-child a { border-right: none; }
+    .nav-links a:hover { color:var(--paper); background: rgba(13,13,11,0.04); }
+    .nav-links a.active {
+      color:var(--paper);
+      background: var(--paper);
+      color: var(--ink);
     }
-    .nav-links a:hover,
-    .nav-links a.active { color:var(--paper); }
-    .nav-links a:hover::after,
-    .nav-links a.active::after { width:100%; }
 
     /* APP */
     #app { min-height:100vh; display:flex; flex-direction:column; }
@@ -539,10 +541,10 @@
     </div>
     <div class="pre-center">
       <div class="pre-counter" id="pre-counter">0</div>
+      <div class="pre-status" id="pre-status">Loading</div>
     </div>
     <div class="pre-bottom">
       <div class="pre-bar-wrap"><div class="pre-bar-fill" id="pre-bar"></div></div>
-      <div class="pre-status" id="pre-status">Loading</div>
     </div>
   </div>
   <div class="pre-wipe-top"    id="wipe-top"></div>
@@ -798,7 +800,7 @@
               <p class="contact-left-intro">Looking to start a project or need consultation? Feel free to reach out — always open to new collaborations and interesting challenges.</p>
               <div class="contact-detail-row">
                 <span class="contact-detail-key">Email</span>
-                <span class="contact-detail-val"><a href="/cdn-cgi/l/email-protection#94f5ecf1f8ecfdf6f1e6e6f5e7a5d4f3f9f5fdf8baf7fbf9"><span class="__cf_email__" data-cfemail="8cedf4e9e0f4e5eee9fefeedffbdccebe1ede5e0a2efe3e1">[email&#160;protected]</span></a></span>
+                <span class="contact-detail-val"><a href="mailto:axelxiberras1@gmail.com">axelxiberras1@gmail.com</a></span>
               </div>
               <div class="contact-detail-row">
                 <span class="contact-detail-key">Portfolio</span>
@@ -847,7 +849,7 @@
     </div>
   </div>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
   (function(){
 
     /* ── PROJECT DATA ───────────────────────── */
@@ -1214,11 +1216,16 @@
     var form=document.getElementById('contact-form');
     if(form) form.addEventListener('submit',function(e){
       e.preventDefault();
+      var name    = document.getElementById('c-name')    ? document.getElementById('c-name').value    : '';
+      var email   = document.getElementById('c-email')   ? document.getElementById('c-email').value   : '';
+      var message = document.getElementById('c-message') ? document.getElementById('c-message').value : '';
+      var subject = encodeURIComponent('Portfolio Enquiry' + (name ? ' from ' + name : ''));
+      var body    = encodeURIComponent((name ? 'Name: ' + name + '\n' : '') + 'Email: ' + email + '\n\n' + message);
+      window.location.href = 'mailto:axelxiberras1@gmail.com?subject=' + subject + '&body=' + body;
       var btn=document.getElementById('send-btn');
-      btn.textContent='Sent ✓';
-      btn.style.background='#7ec87e';
-      btn.disabled=true;
-      setTimeout(function(){ btn.innerHTML='Send Message <span class="arr">→</span>'; btn.style.background=''; btn.disabled=false; form.reset(); },3000);
+      btn.textContent='Opening mail…';
+      btn.style.background='var(--accent)';
+      setTimeout(function(){ btn.innerHTML='Send Message <span class="arr">→</span>'; btn.style.background=''; form.reset(); },2500);
     });
 
   })();
