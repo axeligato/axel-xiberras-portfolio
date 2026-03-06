@@ -6,7 +6,7 @@
   <title>Axel Xiberras — UX/UI Designer</title>
   <meta name="description" content="Axel Xiberras — UX/UI Designer. Gobelins graduate specialising in game design, interactive experiences and web design." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Double:wght@100..900&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
   <style>
     :root {
       --ink:    #f9faf4;
@@ -19,6 +19,7 @@
       --nav-h:  60px;
       --ease:   cubic-bezier(0.76, 0, 0.24, 1);
       --helvetica: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      --display: 'Bitcount Prop Double', monospace;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -74,10 +75,10 @@
       position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
     }
     .pre-counter {
-      font-family: var(--helvetica);
-      font-weight: 700;
+      font-family: var(--display);
+      font-weight: 300;
       font-size: clamp(100px,20vw,240px);
-      line-height:1; letter-spacing:-.04em; color:var(--paper);
+      line-height:1; letter-spacing:-.02em; color:var(--paper);
       opacity:0; animation: fi .5s .3s forwards;
     }
     .pre-bottom { display:flex; justify-content:space-between; align-items:flex-end; }
@@ -166,14 +167,14 @@
     }
     .home-number { font-family: var(--helvetica); font-size:10px; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--mid); margin-bottom:32px; }
     .home-title {
-      font-family: var(--helvetica);
-      font-weight: 700;
-      font-size:clamp(80px,14vw,200px); line-height:.88; letter-spacing:-.03em; color:var(--paper);
+      font-family: var(--display);
+      font-weight: 300;
+      font-size:clamp(80px,14vw,200px); line-height:.88; letter-spacing:-.01em; color:var(--paper);
       text-transform: uppercase;
     }
     .home-title .ital {
-      font-family: var(--helvetica); font-style: normal; font-weight: 300;
-      font-size:clamp(68px,11vw,160px); letter-spacing:-.03em; color:var(--accent); display:block;
+      font-family: var(--display); font-style: normal; font-weight: 300;
+      font-size:clamp(68px,11vw,160px); letter-spacing:-.01em; color:var(--accent); display:block;
     }
     .home-rule { width:100%; height:1px; background:var(--rule); margin:48px 0; }
     .home-bottom { display:grid; grid-template-columns:1fr 1fr 1fr; }
@@ -202,7 +203,7 @@
     #page-projects { padding-top:var(--nav-h); }
     .proj-header { padding:80px 0 60px; border-bottom:1px solid var(--rule); }
     .proj-header-inner { display:flex; justify-content:space-between; align-items:flex-end; gap:48px; }
-    .proj-header h1 { font-family: var(--helvetica); font-weight:700; font-size:clamp(60px,10vw,140px); line-height:.9; letter-spacing:-.03em; text-transform:uppercase; color:var(--paper); }
+    .proj-header h1 { font-family: var(--display); font-weight:300; font-size:clamp(60px,10vw,140px); line-height:.9; letter-spacing:-.01em; text-transform:uppercase; color:var(--paper); }
     .proj-header-right { max-width:340px; text-align:right; }
     .proj-header-right p { font-family: var(--helvetica); font-size:12px; font-weight:400; color:var(--mid); line-height:1.8; }
 
@@ -247,7 +248,7 @@
     #page-about { padding-top:var(--nav-h); }
     .about-header { padding:80px 0 0; border-bottom:1px solid var(--rule); }
     .about-header-inner { display:grid; grid-template-columns:1fr 1fr; align-items:end; gap:80px; padding-bottom:60px; }
-    .about-header h1 { font-family: var(--helvetica); font-weight:700; font-size:clamp(60px,10vw,140px); line-height:.9; letter-spacing:-.03em; text-transform:uppercase; color:var(--paper); }
+    .about-header h1 { font-family: var(--display); font-weight:300; font-size:clamp(60px,10vw,140px); line-height:.9; letter-spacing:-.01em; text-transform:uppercase; color:var(--paper); }
     .about-header-right h2 { font-family: var(--helvetica); font-style:normal; font-weight:300; font-size:clamp(18px,2.2vw,26px); color:var(--warm); line-height:1.5; margin-bottom:20px; letter-spacing:-.01em; }
     .about-header-right p  { font-family: var(--helvetica); font-size:12px; font-weight:400; color:var(--mid); line-height:1.9; }
 
@@ -306,8 +307,8 @@
     /* ── CONTACT ── */
     #page-contact { padding-top:var(--nav-h); }
     .contact-hero { padding:80px 0 60px; border-bottom:1px solid var(--rule); }
-    .contact-hero h1 { font-family: var(--helvetica); font-weight:700; font-size:clamp(64px,12vw,160px); line-height:.9; letter-spacing:-.03em; text-transform:uppercase; color:var(--paper); }
-    .contact-hero h1 em { font-family: var(--helvetica); font-style:normal; font-weight:300; color:var(--accent); }
+    .contact-hero h1 { font-family: var(--display); font-weight:300; font-size:clamp(64px,12vw,160px); line-height:.9; letter-spacing:-.01em; text-transform:uppercase; color:var(--paper); }
+    .contact-hero h1 em { font-family: var(--display); font-style:normal; font-weight:300; color:var(--accent); }
     .contact-body { padding:80px 0; }
     .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:100px; }
     .contact-left-intro { font-family: var(--helvetica); font-size:13px; font-weight:400; color:var(--mid); line-height:1.9; margin-bottom:48px; }
@@ -454,9 +455,9 @@
     }
 
     .ov-title {
-      font-family: var(--helvetica); font-weight: 700;
+      font-family: var(--display); font-weight: 300;
       font-size: clamp(36px, 6vw, 64px);
-      letter-spacing: -.03em; line-height: .95; text-transform: uppercase;
+      letter-spacing: -.01em; line-height: .95; text-transform: uppercase;
       color: var(--paper); margin-bottom: 8px;
     }
 
