@@ -15,7 +15,7 @@
       --mid:    #8a8278;
       --faint:  #1a1a17;
       --rule:   rgba(240,236,227,0.1);
-      --accent: #d4a853;
+      --accent: #e8722a;
       --nav-h:  60px;
       --ease:   cubic-bezier(0.76, 0, 0.24, 1);
     }
@@ -366,6 +366,150 @@
       .nav-links { gap:20px; }
     }
     @media(max-width:420px){ .nav-links { display:none; } }
+
+    /* ── PROJECT OVERLAY ── */
+    #proj-overlay {
+      position: fixed; inset: 0; z-index: 2000;
+      display: flex; align-items: stretch;
+      pointer-events: none; visibility: hidden;
+    }
+
+    #proj-overlay.open { pointer-events: all; visibility: visible; }
+
+    .ov-backdrop {
+      position: absolute; inset: 0;
+      background: rgba(10,10,8,.7);
+      backdrop-filter: blur(6px);
+      opacity: 0; transition: opacity .5s var(--ease);
+    }
+
+    #proj-overlay.open .ov-backdrop { opacity: 1; }
+
+    .ov-panel {
+      position: relative; margin-left: auto;
+      width: min(780px, 100vw);
+      height: 100vh;
+      background: var(--faint);
+      border-left: 1px solid var(--rule);
+      display: flex; flex-direction: column;
+      transform: translateX(100%);
+      transition: transform .65s var(--ease);
+      overflow: hidden;
+    }
+
+    #proj-overlay.open .ov-panel { transform: translateX(0); }
+
+    /* close button */
+    .ov-close {
+      position: absolute; top: 24px; right: 28px; z-index: 10;
+      background: none; border: 1px solid var(--rule);
+      color: var(--mid); font-family: 'DM Mono', monospace;
+      font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+      padding: 8px 16px; cursor: none;
+      transition: color .2s, border-color .2s;
+    }
+    .ov-close:hover { color: var(--paper); border-color: var(--paper); }
+
+    /* scrollable body */
+    .ov-scroll {
+      flex: 1; overflow-y: auto; overflow-x: hidden;
+      scrollbar-width: thin; scrollbar-color: var(--faint) transparent;
+    }
+    .ov-scroll::-webkit-scrollbar { width: 4px; }
+    .ov-scroll::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 2px; }
+
+    /* hero image */
+    .ov-hero {
+      width: 100%; aspect-ratio: 16/9; overflow: hidden;
+      flex-shrink: 0;
+    }
+    .ov-hero img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(15%); }
+
+    /* content */
+    .ov-content { padding: 48px 52px 72px; }
+
+    .ov-meta {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 8px;
+    }
+
+    .ov-category {
+      font-family: 'DM Mono', monospace; font-size: 9px;
+      letter-spacing: .22em; text-transform: uppercase; color: var(--accent);
+    }
+
+    .ov-year {
+      font-family: 'DM Mono', monospace; font-size: 9px;
+      letter-spacing: .16em; color: var(--mid);
+    }
+
+    .ov-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px, 6vw, 64px);
+      letter-spacing: .02em; line-height: .95;
+      color: var(--paper); margin-bottom: 8px;
+    }
+
+    .ov-subtitle {
+      font-family: 'Instrument Serif', serif; font-style: italic;
+      font-size: 16px; color: var(--mid); margin-bottom: 36px;
+    }
+
+    .ov-rule { border: none; border-top: 1px solid var(--rule); margin: 32px 0; }
+
+    .ov-desc {
+      font-family: 'DM Mono', monospace; font-size: 12px;
+      color: var(--warm); line-height: 1.9; margin-bottom: 36px;
+    }
+
+    /* tags */
+    .ov-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 48px; }
+
+    .ov-tag {
+      font-family: 'DM Mono', monospace; font-size: 10px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--mid); border: 1px solid var(--rule);
+      padding: 6px 14px; transition: color .2s, border-color .2s;
+    }
+
+    .ov-tag.software { color: var(--accent); border-color: rgba(212,168,83,.3); }
+
+    /* image gallery */
+    .ov-gallery-label {
+      font-family: 'DM Mono', monospace; font-size: 9px;
+      letter-spacing: .22em; text-transform: uppercase; color: var(--mid);
+      margin-bottom: 20px;
+    }
+
+    .ov-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-bottom: 16px; }
+    .ov-gallery-wide { grid-column: span 2; }
+
+    .ov-gallery img {
+      width: 100%; aspect-ratio: 16/10; object-fit: cover;
+      display: block; filter: grayscale(10%);
+      transition: filter .4s;
+    }
+    .ov-gallery-wide img { aspect-ratio: 21/9; }
+    .ov-gallery img:hover { filter: grayscale(0%); }
+
+    .ov-live-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: 'DM Mono', monospace; font-size: 10px;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--ink); background: var(--accent);
+      padding: 13px 28px; text-decoration: none;
+      transition: background .25s, color .25s;
+      cursor: none;
+    }
+    .ov-live-btn:hover { background: var(--paper); color: var(--ink); }
+
+    @media(max-width:600px){
+      .ov-panel { width: 100vw; border-left: none; }
+      .ov-content { padding: 36px 24px 60px; }
+      .ov-gallery { grid-template-columns: 1fr; }
+      .ov-gallery-wide { grid-column: span 1; }
+      .ov-gallery-wide img { aspect-ratio: 16/10; }
+    }
   </style>
 </head>
 <body>
@@ -457,34 +601,30 @@
         <div class="container">
           <div class="cat-heading" data-cat="game">
             <span class="cat-heading-title">Game Design</span>
-            <span class="cat-heading-count">07 projects</span>
+            <span class="cat-heading-count">06 projects</span>
           </div>
           <div class="projects-grid" data-cat="game">
-            <div class="project-card featured">
-              <div class="project-thumb"><img src="https://framerusercontent.com/images/hHNRF2WuNUqp7D8QzOsO5hB9g.jpg" alt="Tactical Simulation Game" loading="lazy"/></div>
-              <div class="project-info"><div><div class="project-title">Tactical Simulation Game</div><div class="project-desc">UX design exercise for a tactical simulation title.</div></div><span class="project-arrow">↗</span></div>
+            <div class="project-card featured" data-project="tactical-sim">
+              <div class="project-thumb"><img src="https://framerusercontent.com/images/etTLuHagtoFBmn68f4HAzj4Rw.png" alt="Tactical Simulation Game" loading="lazy"/></div>
+              <div class="project-info"><div><div class="project-title">Tactical Simulation Game</div><div class="project-desc">Case study — improve onboarding flows for session setup.</div></div><span class="project-arrow">↗</span></div>
             </div>
-            <div class="project-card">
-              <div class="project-thumb"><img src="https://framerusercontent.com/images/Zkfspp2ggZoUd8skdhi6KmdoAI.png" alt="Apple Arcade Quiz Game" loading="lazy"/></div>
+            <div class="project-card" data-project="apple-arcade">
+              <div class="project-thumb"><img src="https://framerusercontent.com/images/eL8D8lEEgLlrp8CfZ6ocxqS2w.png" alt="Apple Arcade Quiz Game" loading="lazy"/></div>
               <div class="project-info"><div><div class="project-title">Apple Arcade Quiz Game</div><div class="project-desc">To be released on all iOS platforms.</div></div><span class="project-arrow">↗</span></div>
             </div>
-            <div class="project-card">
-              <div class="project-thumb"><img src="https://framerusercontent.com/images/m21ae8QDNK5ioQ0icr4ODKz1A.png" alt="Le Petit Prince" loading="lazy"/></div>
-              <div class="project-info"><div><div class="project-title">Le Petit Prince Elevator Pitch(es)</div><div class="project-desc">Two different takes on the classic story.</div></div><span class="project-arrow">↗</span></div>
+            <div class="project-card" data-project="pitches">
+              <div class="project-thumb"><img src="https://framerusercontent.com/images/m21ae8QDNK5ioQ0icr4ODKz1A.png" alt="Game Design Elevator Pitches" loading="lazy"/></div>
+              <div class="project-info"><div><div class="project-title">Game Design Elevator Pitches</div><div class="project-desc">Le Petit Prince & A Quiet Place — two IP adaptations.</div></div><span class="project-arrow">↗</span></div>
             </div>
-            <div class="project-card">
-              <div class="project-thumb"><img src="https://framerusercontent.com/images/JP7NcqFlgAzc4QLX3oGRv1lZaB0.png" alt="A Quiet Place" loading="lazy"/></div>
-              <div class="project-info"><div><div class="project-title">'A Quiet Place' Elevator Pitch</div><div class="project-desc">Concept for a first person horror game.</div></div><span class="project-arrow">↗</span></div>
-            </div>
-            <div class="project-card">
+            <div class="project-card" data-project="abysses">
               <div class="project-thumb"><img src="https://framerusercontent.com/images/NkHNaPLwZZ58RGZYPlc4ACz0.png" alt="Journal des Abysses" loading="lazy"/></div>
               <div class="project-info"><div><div class="project-title">Journal des Abysses</div><div class="project-desc">Collaborative mixed platform board game.</div></div><span class="project-arrow">↗</span></div>
             </div>
-            <div class="project-card">
+            <div class="project-card" data-project="aden">
               <div class="project-thumb"><img src="https://framerusercontent.com/images/l9kgANX3wcoSUz7X67xfNdUpINU.jpg" alt="Aden Recollection" loading="lazy"/></div>
               <div class="project-info"><div><div class="project-title">Aden : Recollection</div><div class="project-desc">First person parkour video game. Unity.</div></div><span class="project-arrow">↗</span></div>
             </div>
-            <div class="project-card">
+            <div class="project-card" data-project="cote780">
               <div class="project-thumb"><img src="https://framerusercontent.com/images/CSvzvOYhkKEwitr677LPvj3aMgs.png" alt="Cote 780" loading="lazy"/></div>
               <div class="project-info"><div><div class="project-title">Cote 780 : Souvenirs Engloutis</div><div class="project-desc">Narrative experience — 2D, 3D, sound design.</div></div><span class="project-arrow">↗</span></div>
             </div>
@@ -492,24 +632,20 @@
 
           <div class="cat-heading" data-cat="web" style="margin-top:64px;">
             <span class="cat-heading-title">Web Design</span>
-            <span class="cat-heading-count">04 projects</span>
+            <span class="cat-heading-count">03 projects</span>
           </div>
           <div class="projects-grid" data-cat="web">
-            <div class="project-card featured">
-              <div class="project-thumb"><img src="https://framerusercontent.com/images/D9ohNcE5teYsZ730efFxKYikqZI.png" alt="Stellar Finances" loading="lazy"/></div>
-              <div class="project-info"><div><div class="project-title">Stellar Finances</div><div class="project-desc">Web design for an online banking platform.</div></div><span class="project-arrow">↗</span></div>
+            <div class="project-card featured" data-project="landing-pages">
+              <div class="project-thumb"><img src="https://framerusercontent.com/images/eCFGk5Ichh91I5XNIPX65U0wVyY.png" alt="Landing Pages" loading="lazy"/></div>
+              <div class="project-info"><div><div class="project-title">Landing Pages</div><div class="project-desc">Stellar Finances & Future — branding and hero concepts.</div></div><span class="project-arrow">↗</span></div>
             </div>
-            <div class="project-card">
-              <div class="project-thumb"><img src="https://framerusercontent.com/images/7tWN2q6si4PBD54JcM6ugNNVzwU.png" alt="Future Landing Page" loading="lazy"/></div>
-              <div class="project-info"><div><div class="project-title">Future Landing Page</div><div class="project-desc">Web design for a Chinese fashion brand's shop.</div></div><span class="project-arrow">↗</span></div>
+            <div class="project-card" data-project="royal-canin">
+              <div class="project-thumb"><img src="https://framerusercontent.com/images/sD0zk6JfyhZKYSwK4wfX2ijk.jpg" alt="Royal Canin" loading="lazy"/></div>
+              <div class="project-info"><div><div class="project-title">Royal Canin</div><div class="project-desc">Full rebranding of Royal Canin's internet presence.</div></div><span class="project-arrow">↗</span></div>
             </div>
-            <div class="project-card">
-              <div class="project-thumb"><img src="https://framerusercontent.com/images/xTH56K0h7zIrFyVFQfEA3CNTxk.png" alt="Bouygues" loading="lazy"/></div>
-              <div class="project-info"><div><div class="project-title">Bouygues</div><div class="project-desc">Chat assistant for a telecom brand.</div></div><span class="project-arrow">↗</span></div>
-            </div>
-            <div class="project-card">
-              <div class="project-thumb"><img src="https://framerusercontent.com/images/KRYgOcLLjIUpTq0FUQGzmEU7Xw.jpg" alt="Royal Canin" loading="lazy"/></div>
-              <div class="project-info"><div><div class="project-title">Royal Canin</div><div class="project-desc">Web pages rebranding.</div></div><span class="project-arrow">↗</span></div>
+            <div class="project-card" data-project="gabryel">
+              <div class="project-thumb"><img src="https://framerusercontent.com/images/D9ohNcE5teYsZ730efFxKYikqZI.png" alt="Gabryel Sallehount Portfolio" loading="lazy"/></div>
+              <div class="project-info"><div><div class="project-title">Gabryel Sallehount Portfolio</div><div class="project-desc">Portfolio website design & development.</div></div><span class="project-arrow">↗</span></div>
             </div>
           </div>
         </div>
@@ -649,7 +785,7 @@
               <p class="contact-left-intro">Looking to start a project or need consultation? Feel free to reach out — always open to new collaborations and interesting challenges.</p>
               <div class="contact-detail-row">
                 <span class="contact-detail-key">Email</span>
-                <span class="contact-detail-val"><a href="mailto:axelxiberras1@gmail.com">axelxiberras1@gmail.com</a></span>
+                <span class="contact-detail-val"><a href="/cdn-cgi/l/email-protection#94f5ecf1f8ecfdf6f1e6e6f5e7a5d4f3f9f5fdf8baf7fbf9"><span class="__cf_email__" data-cfemail="8cedf4e9e0f4e5eee9fefeedffbdccebe1ede5e0a2efe3e1">[email&#160;protected]</span></a></span>
               </div>
               <div class="contact-detail-row">
                 <span class="contact-detail-key">Portfolio</span>
@@ -671,10 +807,281 @@
 
   </div>
 
-  <script>
+  <!-- PROJECT OVERLAY -->
+  <div id="proj-overlay">
+    <div class="ov-backdrop" id="ov-backdrop"></div>
+    <div class="ov-panel" id="ov-panel">
+      <button class="ov-close" id="ov-close">Close ✕</button>
+      <div class="ov-scroll" id="ov-scroll">
+        <div class="ov-hero"><img id="ov-hero-img" src="" alt="" /></div>
+        <div class="ov-content">
+          <div class="ov-meta">
+            <span class="ov-category" id="ov-category"></span>
+            <span class="ov-year"     id="ov-year"></span>
+          </div>
+          <h2 class="ov-title"    id="ov-title"></h2>
+          <p  class="ov-subtitle" id="ov-subtitle"></p>
+          <hr class="ov-rule" />
+          <p  class="ov-desc"     id="ov-desc"></p>
+          <div class="ov-tags"    id="ov-tags"></div>
+          <div id="ov-live-wrap" style="display:none; margin-bottom:40px;">
+            <a class="ov-live-btn" id="ov-live-btn" href="#" target="_blank" rel="noopener">View Live Site ↗</a>
+          </div>
+          <div class="ov-gallery-label">Project Images</div>
+          <div class="ov-gallery" id="ov-gallery"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   (function(){
 
-    /* CURSOR */
+    /* ── PROJECT DATA ───────────────────────── */
+    var PROJECTS = {
+      'tactical-sim': {
+        title: 'Tactical Simulation Game',
+        subtitle: 'Case study — UX/UI · Video Games · 2025',
+        category: 'Game Design',
+        year: '2025',
+        desc: 'Goal: improve onboarding flows for session setup. This case study covers the full redesign of the session creation and onboarding experience for an unannounced tactical simulation game. The work involved auditing existing flows, identifying friction points in the setup process, and producing wireframes through to high-fidelity mockups. The final deliverable included a fully interactive Figma prototype covering all key onboarding screens.',
+        tags: ['UX Research','Onboarding','Wireframing','Prototyping','Game UI','Case Study'],
+        software: ['Figma'],
+        hero: 'https://framerusercontent.com/images/etTLuHagtoFBmn68f4HAzj4Rw.png',
+        images: [
+          { src: 'https://framerusercontent.com/images/etTLuHagtoFBmn68f4HAzj4Rw.png', wide: true },
+          { src: 'https://framerusercontent.com/images/9HEUJagS4NZsIMZmuXUKsnclm9I.png', wide: false },
+          { src: 'https://framerusercontent.com/images/YvYtJSJYqohW4CwH5fWReNOR4.png', wide: false },
+          { src: 'https://framerusercontent.com/images/GL7XjvavBwoS1c4egjdOXmQmGSY.png', wide: false },
+          { src: 'https://framerusercontent.com/images/lOWS1ZqxahzHUQC97a8rcbhpPGc.png', wide: false },
+          { src: 'https://framerusercontent.com/images/5UqF8aBJoqIpjtd5dxac05k6uY.png', wide: true },
+          { src: 'https://framerusercontent.com/images/NZsTR93vb5gTwiIUjAqIq3maXA.png', wide: false },
+          { src: 'https://framerusercontent.com/images/OzUgqlhn4kWJ1VquCiQBeTQ3Qo.png', wide: false }
+        ]
+      },
+      'apple-arcade': {
+        title: 'Apple Arcade Quiz Game',
+        subtitle: 'UX/UI · Video Games · To be released · 2025',
+        category: 'Game Design',
+        year: '2025',
+        desc: 'For this iOS platforms working game for Apple Arcade, I worked on landscape wireframes for the different game modes, and then a lot of mockups for juiciness improvements — such as score recaps for some game modes, a tutorial section in the settings, and tutorial cards. Re-organised user experience for multiplayer modes matchmaking and match settings. Produced mockups for features such as: daily login juiciness improvement; text inputs; button states; a full game mode intended for solo play.',
+        tags: ['Wireframing','Mockups','Multiplayer UX','Cross-platform','Juiciness','Game UI'],
+        software: ['Figma'],
+        hero: 'https://framerusercontent.com/images/eL8D8lEEgLlrp8CfZ6ocxqS2w.png',
+        images: [
+          { src: 'https://framerusercontent.com/images/eL8D8lEEgLlrp8CfZ6ocxqS2w.png', wide: true },
+          { src: 'https://framerusercontent.com/images/SqAmd2Hl9Fyy5crIGTqSbsCXrXc.png', wide: true },
+          { src: 'https://framerusercontent.com/images/RGaOhWNyoa6X3bPKHbpwZeOVe0k.png', wide: true },
+          { src: 'https://framerusercontent.com/images/JEG1QPXdH2Kn7fUjftEX6I03A.png', wide: false },
+          { src: 'https://framerusercontent.com/images/nKUlXuBQKAaJ8qtWqXN4SBivXw.png', wide: false },
+          { src: 'https://framerusercontent.com/images/ujMhGUvzhwX0NxmuodZ4UeuRLtY.png', wide: false },
+          { src: 'https://framerusercontent.com/images/zDxxtxK7e9loW0hjXgzP3Nlabjg.png', wide: false },
+          { src: 'https://framerusercontent.com/images/fNvVDqLloDV5fpjHQNHcHqo4Ks.jpg', wide: false },
+          { src: 'https://framerusercontent.com/images/rWlmdgOoPojLVFjqAYIuKRh6Jxc.jpg', wide: false },
+          { src: 'https://framerusercontent.com/images/mXMPPkG4Hp7m5B0fouLuOntQIZ8.jpg', wide: false },
+          { src: 'https://framerusercontent.com/images/3QvQNDWW2vgm6TQxKNHqLTM1kQ.jpg', wide: false }
+        ]
+      },
+      'pitches': {
+        title: 'Game Design Elevator Pitches',
+        subtitle: 'Le Petit Prince · A Quiet Place — Game Design · 2023',
+        category: 'Game Design',
+        year: '2023',
+        desc: 'Two elevator pitches for game adaptations of iconic IPs. The first reimagines Le Petit Prince as a meditative exploration game — players guide the Little Prince across hand-illustrated planets, uncovering the story through environmental discovery and quiet interactions. The second adapts A Quiet Place into a first-person horror game, where sound becomes both the primary danger and mechanic. Each pitch covers concept, core gameplay loop, target platform, mood direction, and key screen mockups.',
+        tags: ['Game Concept','Narrative Design','IP Adaptation','Elevator Pitch','Mood Board'],
+        software: ['Figma','Adobe Photoshop'],
+        hero: 'https://framerusercontent.com/images/m21ae8QDNK5ioQ0icr4ODKz1A.png',
+        images: [
+          { src: 'https://framerusercontent.com/images/m21ae8QDNK5ioQ0icr4ODKz1A.png', wide: true },
+          { src: 'https://framerusercontent.com/images/JP7NcqFlgAzc4QLX3oGRv1lZaB0.png', wide: false },
+          { src: 'https://framerusercontent.com/images/NkHNaPLwZZ58RGZYPlc4ACz0.png', wide: false }
+        ]
+      },
+      'abysses': {
+        title: 'Journal des Abysses',
+        subtitle: 'Game Design · Game Jam · 2024',
+        category: 'Game Design',
+        year: '2024',
+        desc: 'Journal of the Abyss is a puzzle-like game combining a printed guide for one player and a game file for the other — a fully cooperative experience designed to beat the game together. If you\'ve played "Keep Talking and Nobody Explodes", it\'s kind of like that — except one player uses a printed notebook and the other plays on a laptop. Oh, and instead of a bomb, you can get either cursed or saved by a god-like entity from the depths of the ocean. Half board game, half Subnautica hatchling.',
+        tags: ['Cooperative','Puzzle Design','Hybrid Physical/Digital','Game Jam','Print Design'],
+        software: ['Figma','Adobe Illustrator'],
+        hero: 'https://framerusercontent.com/images/NkHNaPLwZZ58RGZYPlc4ACz0.png',
+        images: [
+          { src: 'https://framerusercontent.com/images/NkHNaPLwZZ58RGZYPlc4ACz0.png', wide: true },
+          { src: 'https://framerusercontent.com/images/Q9JO6vYI3BmuCnqEMez2db1RYRY.png', wide: false },
+          { src: 'https://framerusercontent.com/images/lKT9uiUzqocsEL4pZpLsmbhyHt4.png', wide: false },
+          { src: 'https://framerusercontent.com/images/cCYdYpNoDX56NJwr3xJI83Rz4PM.png', wide: false },
+          { src: 'https://framerusercontent.com/images/Ev82agPl6ch3ygj1G2Gd72bLNs8.png', wide: false },
+          { src: 'https://framerusercontent.com/images/ahI55Bo4w3WGGEkTRCOZoSRp9g.png', wide: false },
+          { src: 'https://framerusercontent.com/images/9B6azZ6C1n7sRKsNtrCZ0Rf7EY.png', wide: false },
+          { src: 'https://framerusercontent.com/images/nzm9l6mYWpfd32JUjBQluvIAcU.png', wide: false },
+          { src: 'https://framerusercontent.com/images/cYmrHB5LTBItQS2Oyn1azSNpCs.png', wide: false },
+          { src: 'https://framerusercontent.com/images/kpGkcsgGg9l1oIrTjNlr05NdY.png', wide: false }
+        ]
+      },
+      'aden': {
+        title: 'Aden : Recollection',
+        subtitle: 'Game Design · Video Games · 2022',
+        category: 'Game Design',
+        year: '2022',
+        desc: 'Welcome to 2222. All forms of nature have disappeared on Earth. The rest of humanity survives in the city of Aden — a megalopolis closed to the outside world, where the shadow of a mysterious corporation, Al Kahana, looms over all citizens with a citizen score. In this world that hides many mysteries, you will go through the different floors of the city, juggling between investigation, exploration, and parkour. Will you be able to find all the adventure?',
+        tags: ['Game Design','Narrative Design','Parkour','Dystopia','Unity'],
+        software: ['Figma','Unity','Blender'],
+        hero: 'https://framerusercontent.com/images/l9kgANX3wcoSUz7X67xfNdUpINU.jpg',
+        images: [
+          { src: 'https://framerusercontent.com/images/l9kgANX3wcoSUz7X67xfNdUpINU.jpg', wide: true },
+          { src: 'https://framerusercontent.com/images/vuIKjjaHq3RF6AJG2tML0vBK0WI.png', wide: false },
+          { src: 'https://framerusercontent.com/images/CpI4XO4E0xV8nQ6jD8ltjiRsTKg.png', wide: false },
+          { src: 'https://framerusercontent.com/images/ULPyd8hK39aZSEGrcJ6ffQxWE.png', wide: false },
+          { src: 'https://framerusercontent.com/images/DJ7lRZ2JdJ2DQMWnRVnJe0aD7KQ.png', wide: false }
+        ]
+      },
+      'cote780': {
+        title: 'Cote 780 : Souvenirs Engloutis',
+        subtitle: 'Game Design · Regional Heritage · 2024',
+        category: 'Game Design',
+        year: '2024',
+        desc: 'In the rural area of France, a lake and a city have been submerged in time: Savines-le-Lac. Years pass, memories remain. Savines becomes Serre-Ponçon. A curious and kind-hearted boy opens a strange letter from his deceased grandmother, urging him to reconnect with the ecosystem of their village\'s valley. Play through several mini-games and uncover the history of this fascinating region and its beautiful landscapes through a tale of friendship, recollection, and acceptance.',
+        tags: ['Mini-games','Narrative','Regional Heritage','2D Art','Game Design'],
+        software: ['Figma','Adobe Illustrator','Blender'],
+        hero: 'https://framerusercontent.com/images/CSvzvOYhkKEwitr677LPvj3aMgs.png',
+        images: [
+          { src: 'https://framerusercontent.com/images/CSvzvOYhkKEwitr677LPvj3aMgs.png', wide: true },
+          { src: 'https://framerusercontent.com/images/H0EQ0NbqKHujE904lq97eSWpI.png', wide: false },
+          { src: 'https://framerusercontent.com/images/VsI29NHq2tidpxR6hehO0GP3roA.png', wide: false },
+          { src: 'https://framerusercontent.com/images/WQzhMzxoC0tVPL5dK1bB59UEUU.png', wide: true },
+          { src: 'https://framerusercontent.com/images/JnFfq4wljA5qeBmlvG1XwkNYX0.png', wide: false },
+          { src: 'https://framerusercontent.com/images/l9kgANX3wcoSUz7X67xfNdUpINU.jpg', wide: false }
+        ]
+      },
+      'landing-pages': {
+        title: 'Landing Pages',
+        subtitle: 'Stellar Finances · Future — Web Design · 2025',
+        category: 'Web Design',
+        year: '2025',
+        desc: 'Two hero page concepts for distinct clients. Stellar Finances is a secure way to regroup your currencies and invest in the stocks you love in a personalised and centralised manner — compare rates and see your funds grow in real-time. The design focuses on clarity, trust, and financial elegance. Future is a hero concept in progress for a Chinese accessory brand specialised in streetwear to casual styles, pairing bold editorial composition with a wireframe-to-final workflow.',
+        tags: ['Branding','Hero Design','Wireframing','Banking','Fashion','Landing Page'],
+        software: ['Figma','Framer'],
+        hero: 'https://framerusercontent.com/images/eCFGk5Ichh91I5XNIPX65U0wVyY.png',
+        images: [
+          { src: 'https://framerusercontent.com/images/eCFGk5Ichh91I5XNIPX65U0wVyY.png', wide: true },
+          { src: 'https://framerusercontent.com/images/3N7UhdqtFqtyydXd2INFImt4g64.png', wide: false },
+          { src: 'https://framerusercontent.com/images/5qZWdkrTLo9TlvRYK6x4t5cw.png', wide: false },
+          { src: 'https://framerusercontent.com/images/BIAolWa7ODYJ4gCckYlk7b98Y.png', wide: false },
+          { src: 'https://framerusercontent.com/images/vAJuzlFTvMUFXyw0i0XdRRJ7h4.png', wide: false }
+        ]
+      },
+      'royal-canin': {
+        title: 'Royal Canin',
+        subtitle: 'Web Design · Rebranding · Pet Care · 2022',
+        category: 'Web Design',
+        year: '2022',
+        desc: 'A complete rebranding and overhaul of Royal Canin\'s internet presence. The project covered curated breed pages for pet owners, personalised newsletters, updated product pages, and a warmer, more lifestyle-oriented visual tone — translating new brand guidelines into a coherent web component system that scales across the full site.',
+        tags: ['Rebranding','Web Design','Component Library','Brand System','Pet Care'],
+        software: ['Figma','Adobe Photoshop'],
+        liveUrl: 'https://www.royalcanin.com',
+        hero: 'https://framerusercontent.com/images/sD0zk6JfyhZKYSwK4wfX2ijk.jpg',
+        images: [
+          { src: 'https://framerusercontent.com/images/sD0zk6JfyhZKYSwK4wfX2ijk.jpg', wide: true },
+          { src: 'https://framerusercontent.com/images/ClU67yuY97NRgeDjduXtSWk0G7s.jpg', wide: false },
+          { src: 'https://framerusercontent.com/images/8d6GDqS3bZxjD2PfwYFdXEF7gQQ.jpg', wide: false },
+          { src: 'https://framerusercontent.com/images/lnqdaFi0zLgZdRT6yGwvpGqRxQ.jpg', wide: false },
+          { src: 'https://framerusercontent.com/images/KD5Rod8NudyEVfrDh0hTGILeCtU.jpg', wide: false }
+        ]
+      },
+      'gabryel': {
+        title: 'Gabryel Sallehount Portfolio',
+        subtitle: 'Web Design · Portfolio · Freelance · 2025',
+        category: 'Web Design',
+        year: '2025',
+        desc: 'Design and development of a personal portfolio website for Gabryel Sallehount. The project involved building a custom site from scratch — covering visual identity, layout system, and front-end implementation — to showcase creative work in a distinctive and memorable way.',
+        tags: ['Portfolio','Web Design','Front-end','Freelance'],
+        software: ['Figma','Framer','Next.js'],
+        liveUrl: 'https://gabryel-sh-portfolio-git-main-axeligatos-projects.vercel.app/',
+        hero: 'https://framerusercontent.com/images/D9ohNcE5teYsZ730efFxKYikqZI.png',
+        images: [
+          { src: 'https://framerusercontent.com/images/D9ohNcE5teYsZ730efFxKYikqZI.png', wide: true },
+          { src: 'https://framerusercontent.com/images/7tWN2q6si4PBD54JcM6ugNNVzwU.png', wide: false },
+          { src: 'https://framerusercontent.com/images/xTH56K0h7zIrFyVFQfEA3CNTxk.png', wide: false }
+        ]
+      }
+    };
+
+    /* ── OVERLAY LOGIC ──────────────────────── */
+    var overlay  = document.getElementById('proj-overlay');
+    var backdrop = document.getElementById('ov-backdrop');
+    var panel    = document.getElementById('ov-panel');
+    var scroller = document.getElementById('ov-scroll');
+    var closeBtn = document.getElementById('ov-close');
+
+    function openOverlay(key) {
+      var p = PROJECTS[key];
+      if (!p) return;
+
+      document.getElementById('ov-hero-img').src = p.hero;
+      document.getElementById('ov-hero-img').alt = p.title;
+      document.getElementById('ov-category').textContent = p.category;
+      document.getElementById('ov-year').textContent = p.year;
+      document.getElementById('ov-title').textContent = p.title;
+      document.getElementById('ov-subtitle').textContent = p.subtitle;
+      document.getElementById('ov-desc').textContent = p.desc;
+
+      // tags
+      var tagsEl = document.getElementById('ov-tags');
+      tagsEl.innerHTML = '';
+      p.tags.forEach(function(t) {
+        var s = document.createElement('span');
+        s.className = 'ov-tag'; s.textContent = t; tagsEl.appendChild(s);
+      });
+      p.software.forEach(function(t) {
+        var s = document.createElement('span');
+        s.className = 'ov-tag software'; s.textContent = t; tagsEl.appendChild(s);
+      });
+
+      // gallery
+      var galEl = document.getElementById('ov-gallery');
+      galEl.innerHTML = '';
+      p.images.forEach(function(img) {
+        var wrap = document.createElement('div');
+        if (img.wide) wrap.className = 'ov-gallery-wide';
+        var i = document.createElement('img');
+        i.src = img.src; i.alt = p.title; i.loading = 'lazy';
+        wrap.appendChild(i); galEl.appendChild(wrap);
+      });
+
+      // live link
+      var liveWrap = document.getElementById('ov-live-wrap');
+      var liveBtn  = document.getElementById('ov-live-btn');
+      if (p.liveUrl) {
+        liveBtn.href = p.liveUrl;
+        liveWrap.style.display = 'block';
+      } else {
+        liveWrap.style.display = 'none';
+      }
+
+      scroller.scrollTop = 0;
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeOverlay() {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    closeBtn.addEventListener('click', closeOverlay);
+    backdrop.addEventListener('click', closeOverlay);
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeOverlay();
+    });
+
+    /* map card index → project key */
+    var CARD_KEYS = [
+      'tactical-sim','apple-arcade','pitches','abysses','aden','cote780',
+      'landing-pages','royal-canin','gabryel'
+    ];
+
     var dot = document.getElementById('cursor-dot');
     var ring = document.getElementById('cursor-ring');
     var mx=0,my=0,rx=0,ry=0;
@@ -762,6 +1169,9 @@
     document.addEventListener('click',function(e){
       var n=e.target.closest('[data-nav]');
       if(n){ e.preventDefault(); navigate(n.getAttribute('data-nav')); return; }
+
+      var card=e.target.closest('.project-card[data-project]');
+      if(card){ openOverlay(card.getAttribute('data-project')); return; }
       var f=e.target.closest('[data-filter]');
       if(f){
         var cat=f.getAttribute('data-filter');
