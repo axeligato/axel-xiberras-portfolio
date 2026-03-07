@@ -163,20 +163,19 @@
 
     /* ── HOME CAROUSEL ── */
     .home-carousel-section {
-      height: 32vh; min-height: 180px; max-height: 280px;
-      overflow: hidden; position: relative; flex-shrink: 0;
+      flex: 1; min-height: 0; overflow: hidden; position: relative;
     }
     .hc-track-wrap {
       height: 100%; overflow: hidden;
     }
     .home-carousel {
-      display: flex; gap: 12px; height: 100%;
+      display: flex; gap: 10px; height: 100%;
       padding: 0 48px;
       transition: transform .6s cubic-bezier(0.76, 0, 0.24, 1);
       will-change: transform; flex-wrap: nowrap;
     }
     .hc-slide {
-      flex: 0 0 calc(25% - 9px); position: relative; overflow: hidden;
+      flex: 0 0 calc(20% - 8px); position: relative; overflow: hidden;
       cursor: none; min-width: 0; border-radius: 2px;
     }
     .hc-slide img {
@@ -187,7 +186,7 @@
     .hc-slide:hover img { filter: grayscale(0%) contrast(1); transform: scale(1.04); }
     .hc-caption {
       position: absolute; bottom: 12px; left: 12px; right: 12px;
-      padding: 12px 16px 14px;
+      padding: 10px 14px 12px;
       background: rgba(249,250,245,0.14);
       backdrop-filter: blur(12px) saturate(1.4);
       -webkit-backdrop-filter: blur(12px) saturate(1.4);
@@ -203,49 +202,55 @@
       font-family: var(--helvetica); font-size: 8px; font-weight: 400;
       letter-spacing: .14em; color: rgba(249,250,245,0.65);
     }
+    /* nav arrows sit BELOW carousel, inside the carousel section */
     .hc-nav {
-      position: absolute; bottom: 20px; right: 60px;
-      display: flex; gap: 4px; z-index: 10;
+      position: absolute; bottom: 14px; right: 52px;
+      display: flex; gap: 6px; z-index: 10;
     }
     .hc-btn {
       width: 32px; height: 32px;
-      border: 1px solid rgba(15,15,13,0.2);
-      background: rgba(249,250,245,0.7);
+      border: 1px solid rgba(15,15,13,0.18);
+      background: rgba(249,250,245,0.75);
       backdrop-filter: blur(8px);
       color: var(--paper); font-size: 13px; display: flex; align-items: center;
       justify-content: center; cursor: none;
       transition: background .2s, border-color .2s, color .2s;
     }
     .hc-btn:hover { background: var(--accent); border-color: var(--accent); color: #f9faf5; }
+
+    /* ── HOME PAGE ── */
     #page-home { height:100vh; padding-top:var(--nav-h); position:relative; overflow:hidden; display:flex; flex-direction:column; }
     .home-inner {
-      flex:1; display:flex; flex-direction:column; justify-content:center;
-      padding:24px 48px 32px; max-width:1200px; margin:0 auto; width:100%;
+      flex: 0 0 auto;
+      padding: 20px 48px 28px;
+      border-top: 1px solid var(--rule);
     }
-    .home-number { font-family: var(--helvetica); font-size:10px; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--mid); margin-bottom:16px; }
+    .home-inner-top {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 32px;
+    }
+    .home-title-block {}
+    .home-number { font-family: var(--helvetica); font-size:9px; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--mid); margin-bottom:8px; }
     .home-title {
       font-family: var(--display);
       font-weight: 300;
-      font-size:clamp(52px,8vw,120px); line-height:.88; letter-spacing:-.01em; color:var(--paper);
+      font-size: clamp(42px, 6vw, 90px); line-height: .88; letter-spacing: -.01em; color: var(--paper);
       text-transform: uppercase;
     }
     .home-title .ital {
       font-family: var(--display); font-style: normal; font-weight: 300;
-      font-size:clamp(44px,6.5vw,100px); letter-spacing:-.01em; color:var(--accent); display:block;
+      color: var(--accent);
     }
-    .home-rule { width:100%; height:1px; background:var(--rule); margin:20px 0; }
-    .home-bottom { display:grid; grid-template-columns:1fr 1fr 1fr; }
-    .home-cell { padding:0 32px 0 0; border-right:1px solid var(--rule); }
-    .home-cell:first-child { padding-left:0; }
-    .home-cell:last-child  { border-right:none; padding-left:32px; padding-right:0; }
-    .home-cell:nth-child(2){ padding-left:32px; }
-    .home-cell-label { font-family: var(--helvetica); font-size:9px; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--mid); margin-bottom:12px; }
-    .home-cell-body  { font-family: var(--helvetica); font-size:12px; font-weight:400; color:var(--warm); line-height:1.7; }
+    .home-meta {
+      display: flex; gap: 48px; align-items: flex-end;
+    }
+    .home-cell-label { font-family: var(--helvetica); font-size:9px; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--mid); margin-bottom:6px; }
+    .home-cell-body  { font-family: var(--helvetica); font-size:11px; font-weight:400; color:var(--warm); line-height:1.6; }
     .home-cta {
-      display:inline-flex; align-items:center; gap:12px; margin-top:20px;
+      display:inline-flex; align-items:center; gap:12px;
       font-family: var(--helvetica); font-size:10px; font-weight:600; letter-spacing:.18em; text-transform:uppercase;
       color:var(--paper); background:none; border:1px solid rgba(15,15,13,0.25);
-      padding:12px 22px; cursor:none; transition:background .3s,color .3s,border-color .3s;
+      padding:10px 20px; cursor:none; transition:background .3s,color .3s,border-color .3s;
     }
     .home-cta:hover { background:var(--paper); color:var(--ink); border-color:var(--paper); }
     .home-cta .arr { transition:transform .3s var(--ease); }
@@ -681,21 +686,21 @@
 
       <!-- BOTTOM TEXT -->
       <div class="home-inner">
-        <div class="home-number">001 / UX·UI Designer</div>
-        <h1 class="home-title">Axel<br /><span class="ital">Xiberras</span></h1>
-        <div class="home-rule"></div>
-        <div class="home-bottom">
-          <div class="home-cell">
-            <div class="home-cell-label">Discipline</div>
-            <div class="home-cell-body">UX / UI Design<br />Game Design<br />Interactive Media</div>
+        <div class="home-inner-top">
+          <div class="home-title-block">
+            <div class="home-number">001 / UX·UI Designer</div>
+            <h1 class="home-title">Axel <span class="ital">Xiberras</span></h1>
           </div>
-          <div class="home-cell">
-            <div class="home-cell-label">Focus</div>
-            <div class="home-cell-body">Art × Technology.<br />Interfaces that feel<br />as good as they look.</div>
-          </div>
-          <div class="home-cell">
-            <div class="home-cell-label">Entry point</div>
-            <div class="home-cell-body">
+          <div class="home-meta">
+            <div>
+              <div class="home-cell-label">Discipline</div>
+              <div class="home-cell-body">UX / UI · Game · Interactive</div>
+            </div>
+            <div>
+              <div class="home-cell-label">Based in</div>
+              <div class="home-cell-body">Paris, France</div>
+            </div>
+            <div>
               <button class="home-cta" data-nav="projects">View Work <span class="arr">→</span></button>
             </div>
           </div>
@@ -1384,11 +1389,13 @@
       var slides = track.querySelectorAll('.hc-slide');
       var total = slides.length;
       var current = 0;
-      var visibleCount = 4;
+      var visibleCount = 5;
 
       function getSlideWidth() {
         var wrap = track.parentElement;
-        return (wrap.offsetWidth + 3) / visibleCount;
+        var availW = wrap.offsetWidth - 96; /* 48px padding each side */
+        var gap = 10;
+        return (availW - gap * (visibleCount - 1)) / visibleCount + gap;
       }
 
       function update() {
