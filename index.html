@@ -161,11 +161,58 @@
     .footer-l { font-family: var(--helvetica); font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:rgba(15,15,13,0.3); }
     .footer-r { font-family: var(--helvetica); font-size:10px; font-weight:400; letter-spacing:.14em; color:rgba(15,15,13,0.3); }
 
-    /* ── HOME ── */
-    #page-home { min-height:100vh; padding-top:var(--nav-h); position:relative; overflow:hidden; }
+    /* ── HOME CAROUSEL ── */
+    .home-carousel-section {
+      flex: 1; overflow: hidden; position: relative; min-height: 0;
+    }
+    .hc-track-wrap {
+      height: 100%; overflow: hidden;
+    }
+    .home-carousel {
+      display: flex; gap: 3px; height: 100%;
+      transition: transform .6s cubic-bezier(0.76, 0, 0.24, 1);
+      will-change: transform; flex-wrap: nowrap;
+    }
+    .hc-slide {
+      flex: 0 0 calc(25% - 3px); position: relative; overflow: hidden;
+      cursor: none; min-width: 0;
+    }
+    .hc-slide img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      filter: grayscale(20%) contrast(1.05);
+      transition: filter .5s, transform .7s cubic-bezier(0.76, 0, 0.24, 1);
+    }
+    .hc-slide:hover img { filter: grayscale(0%) contrast(1); transform: scale(1.04); }
+    .hc-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 14px 16px 16px;
+      background: linear-gradient(to top, rgba(13,13,11,0.72) 0%, transparent 100%);
+    }
+    .hc-caption-title {
+      font-family: var(--helvetica); font-size: 9px; font-weight: 700;
+      letter-spacing: .2em; text-transform: uppercase; color: #f9faf5;
+      margin-bottom: 2px;
+    }
+    .hc-caption-count {
+      font-family: var(--helvetica); font-size: 8px; font-weight: 400;
+      letter-spacing: .14em; color: rgba(249,250,245,0.55);
+    }
+    .hc-nav {
+      position: absolute; bottom: 16px; right: 16px;
+      display: flex; gap: 4px; z-index: 10;
+    }
+    .hc-btn {
+      width: 36px; height: 36px; border: 1px solid rgba(249,250,245,0.35);
+      background: rgba(13,13,11,0.45); backdrop-filter: blur(6px);
+      color: #f9faf5; font-size: 14px; display: flex; align-items: center;
+      justify-content: center; cursor: none;
+      transition: background .2s, border-color .2s;
+    }
+    .hc-btn:hover { background: var(--accent); border-color: var(--accent); }
+    #page-home { min-height:100vh; padding-top:var(--nav-h); position:relative; overflow:hidden; display:flex; flex-direction:column; }
     .home-inner {
-      flex:1; display:flex; flex-direction:column; justify-content:flex-end;
-      padding:0 48px 80px; max-width:1200px; margin:0 auto; width:100%;
+      flex:0 0 auto; display:flex; flex-direction:column; justify-content:flex-end;
+      padding:48px 48px 64px; max-width:1200px; margin:0 auto; width:100%;
     }
     .home-number { font-family: var(--helvetica); font-size:10px; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--mid); margin-bottom:32px; }
     .home-title {
@@ -297,6 +344,10 @@
     .exp-role    { font-family: var(--helvetica); font-size:18px; font-weight:600; color:var(--paper); padding:28px 24px; vertical-align:top; }
     .exp-company { font-family: var(--helvetica); font-size:10px; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:var(--mid); padding:28px 24px; vertical-align:top; width:200px; }
     .exp-body    { font-family: var(--helvetica); font-size:11px; font-weight:400; color:var(--mid); line-height:1.8; padding:28px 0 28px 24px; vertical-align:top; }
+    .exp-body ul { margin-top:8px; padding-left:14px; list-style:none; }
+    .exp-body ul li { position:relative; padding-left:12px; margin-bottom:4px; }
+    .exp-body ul li::before { content:'—'; position:absolute; left:0; color:var(--accent); font-size:10px; line-height:1.8; }
+    .exp-body strong { color:var(--paper); font-weight:600; }
 
     .edu-section { padding:80px 0; }
     .edu-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; margin-top:48px; }
@@ -565,6 +616,62 @@
 
     <!-- HOME -->
     <div class="page" id="page-home">
+
+      <!-- CAROUSEL -->
+      <div class="home-carousel-section" style="flex:1;overflow:hidden;position:relative;">
+        <div class="hc-track-wrap" style="height:100%;overflow:hidden;">
+          <div class="home-carousel" id="hc-track">
+
+            <div class="hc-slide">
+              <img src="https://framerusercontent.com/images/etTLuHagtoFBmn68f4HAzj4Rw.png" alt="Tactical Sim"/>
+              <div class="hc-caption"><div class="hc-caption-title">Tactical Sim</div><div class="hc-caption-count">Game Design</div></div>
+            </div>
+
+            <div class="hc-slide">
+              <img src="https://framerusercontent.com/images/eL8D8lEEgLlrp8CfZ6ocxqS2w.png" alt="Apple Arcade"/>
+              <div class="hc-caption"><div class="hc-caption-title">Apple Arcade</div><div class="hc-caption-count">Game Design</div></div>
+            </div>
+
+            <div class="hc-slide">
+              <img src="https://lh3.googleusercontent.com/d/1qThLVwEUOPAjJ4o3X8nmc3aYh-obn1QF" alt="Gabryel Sallehount"/>
+              <div class="hc-caption"><div class="hc-caption-title">Gabryel Sallehount</div><div class="hc-caption-count">Photography</div></div>
+            </div>
+
+            <div class="hc-slide">
+              <img src="https://framerusercontent.com/images/sD0zk6JfyhZKYSwK4wfX2ijk.jpg" alt="Royal Canin"/>
+              <div class="hc-caption"><div class="hc-caption-title">Royal Canin</div><div class="hc-caption-count">Web Design</div></div>
+            </div>
+
+            <div class="hc-slide">
+              <img src="https://framerusercontent.com/images/l9kgANX3wcoSUz7X67xfNdUpINU.jpg" alt="Aden Recollection"/>
+              <div class="hc-caption"><div class="hc-caption-title">Aden : Recollection</div><div class="hc-caption-count">Game Design</div></div>
+            </div>
+
+            <div class="hc-slide">
+              <img src="https://framerusercontent.com/images/CSvzvOYhkKEwitr677LPvj3aMgs.png" alt="Cote 780"/>
+              <div class="hc-caption"><div class="hc-caption-title">Cote 780</div><div class="hc-caption-count">Game Design</div></div>
+            </div>
+
+            <div class="hc-slide">
+              <img src="https://framerusercontent.com/images/eCFGk5Ichh91I5XNIPX65U0wVyY.png" alt="Landing Pages"/>
+              <div class="hc-caption"><div class="hc-caption-title">Landing Pages</div><div class="hc-caption-count">Web Design</div></div>
+            </div>
+
+            <div class="hc-slide">
+              <img src="https://framerusercontent.com/images/NkHNaPLwZZ58RGZYPlc4ACz0.png" alt="Journal des Abysses"/>
+              <div class="hc-caption"><div class="hc-caption-title">Journal des Abysses</div><div class="hc-caption-count">Game Jam</div></div>
+            </div>
+
+          </div>
+        </div>
+        <!-- nav arrows -->
+        <div class="hc-nav">
+          <button class="hc-btn" id="hc-prev">←</button>
+          <button class="hc-btn" id="hc-next">→</button>
+        </div>
+      </div>
+
+      <!-- BOTTOM TEXT -->
       <div class="home-inner">
         <div class="home-number">001 / UX·UI Designer</div>
         <h1 class="home-title">Axel<br /><span class="ital">Xiberras</span></h1>
@@ -724,36 +831,70 @@
         <div class="container">
           <div class="eyebrow">Experience</div>
           <table class="exp-table">
+
             <tr class="exp-row">
               <td class="exp-period">2025</td>
               <td class="exp-role">UX/UI Designer</td>
               <td class="exp-company">Gameloft Paris</td>
-              <td class="exp-body">Contributed to UX and UI design of an upcoming Apple Arcade title across mobile, desktop, and Apple TV — from early feature exploration to beta release. Created wireframes, mockups, and interactive flows for multiple game modes.</td>
+              <td class="exp-body">
+                Contributed to the UX and UI design of an upcoming Apple Arcade title across mobile, desktop, and Apple TV, from early feature exploration to beta release.
+                <ul>
+                  <li>Created wireframes, mockups, and interactive flows for multiple game modes and menu systems.</li>
+                  <li>Collaborated with gameplay designers and developers to ensure interface consistency and responsiveness across platforms.</li>
+                  <li>Participated in cross-platform UX optimization, ensuring visual clarity and input coherence between touch, controller, and remote navigation.</li>
+                </ul>
+              </td>
             </tr>
+
             <tr class="exp-row">
               <td class="exp-period">2025 – Now</td>
               <td class="exp-role">Freelance Product Designer</td>
               <td class="exp-company">Independent</td>
-              <td class="exp-body">Missions in product design for rebranding and hosting various sites for clients.</td>
+              <td class="exp-body">Missions in product design for rebranding and building various sites for clients.</td>
             </tr>
+
             <tr class="exp-row">
               <td class="exp-period">2022 – 2024</td>
               <td class="exp-role">UX/UI Designer</td>
-              <td class="exp-company">Ministry of French Finances</td>
-              <td class="exp-body">Led the redesign of the flagship mobile application, resulting in increased user retention. Implemented a streamlined onboarding process, reducing drop-offs.</td>
+              <td class="exp-company">French Ministry of Economy and Finances</td>
+              <td class="exp-body">Led and collaborated on internal digital projects to enhance public services. Designed user interfaces and improved user journeys in partnership with developers and data scientists, focusing on accessibility and clarity for a wide audience.</td>
             </tr>
+
             <tr class="exp-row">
-              <td class="exp-period">2020 – 2022</td>
-              <td class="exp-role">UI/UX Designer</td>
-              <td class="exp-company">BETC FULLSIX</td>
-              <td class="exp-body">Implemented a responsive design approach improving mobile user experience and engagement.</td>
+              <td class="exp-period">2019 – 2021</td>
+              <td class="exp-role">UX/UI & Web Designer</td>
+              <td class="exp-company">Fullsix</td>
+              <td class="exp-body">Worked across digital campaigns and platforms for major clients including Disney, Royal Canin, RATP, and Disneyland Paris. Designed responsive web interfaces, participated in UX research, and contributed to brand-consistent digital experiences.</td>
             </tr>
+
             <tr class="exp-row">
-              <td class="exp-period">2019</td>
+              <td class="exp-period">2015</td>
               <td class="exp-role">Junior UX/UI Designer</td>
               <td class="exp-company">Ubisoft Paris</td>
-              <td class="exp-body">Designed creative solutions including a wellness app and high-traffic e-commerce websites.</td>
+              <td class="exp-body">
+                Supported UX and UI development for Far Cry Primal and Tom Clancy's The Division, collaborating closely with senior designers and developers.
+                <ul>
+                  <li>Assisted in interface layout design, usability testing, and wireframing gameplay systems.</li>
+                  <li>Learned and applied AAA production pipelines, including version control, documentation, and design review workflows.</li>
+                  <li>Strengthened ability to translate complex gameplay data into intuitive user flows and clear player feedback systems.</li>
+                </ul>
+              </td>
             </tr>
+
+            <tr class="exp-row">
+              <td class="exp-period">2020 – 2024</td>
+              <td class="exp-role">UX/UI · Game · Narrative · 3D Designer</td>
+              <td class="exp-company">Gobelins Paris</td>
+              <td class="exp-body">
+                Independent &amp; academic shipped projects.
+                <ul>
+                  <li><strong>Aden</strong> — First-person parkour game prototype (Bachelor project). Designed and implemented core interface elements (HUD, menus, interaction prompts) focusing on player flow, diegetic feedback, and motion clarity.</li>
+                  <li><strong>Journal from the Abyss</strong> (Global Game Jam) — Designed UI mockups and UX flow for an experimental puzzle game, collaborating with programmers and artists to ship a playable prototype within 48 hours. Focused on readability, challenge pacing, and a minimalist aesthetic to reinforce player problem-solving immersion.</li>
+                  <li><strong>Deep Dive</strong> — Interactive exhibition exploring the experience of olympic swimmers through motion detection technology that reflects the user's steps to audio and visual feedback through different phases of the competition, using TouchDesigner.</li>
+                </ul>
+              </td>
+            </tr>
+
           </table>
         </div>
       </div>
@@ -800,7 +941,7 @@
               <p class="contact-left-intro">Looking to start a project or need consultation? Feel free to reach out — always open to new collaborations and interesting challenges.</p>
               <div class="contact-detail-row">
                 <span class="contact-detail-key">Email</span>
-                <span class="contact-detail-val"><a href="mailto:axelxiberras1@gmail.com">axelxiberras1@gmail.com</a></span>
+                <span class="contact-detail-val"><a href="/cdn-cgi/l/email-protection#46273e232a3e2f2423343427357706212b272f2a6825292b"><span class="__cf_email__" data-cfemail="16776e737a6e7f7473646477652756717b777f7a3875797b">[email&#160;protected]</span></a></span>
               </div>
               <div class="contact-detail-row">
                 <span class="contact-detail-key">Portfolio</span>
@@ -849,7 +990,7 @@
     </div>
   </div>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   (function(){
 
     /* ── PROJECT DATA ───────────────────────── */
@@ -1227,6 +1368,42 @@
       btn.style.background='var(--accent)';
       setTimeout(function(){ btn.innerHTML='Send Message <span class="arr">→</span>'; btn.style.background=''; form.reset(); },2500);
     });
+
+    /* CAROUSEL */
+    (function(){
+      var track = document.getElementById('hc-track');
+      if (!track) return;
+      var slides = track.querySelectorAll('.hc-slide');
+      var total = slides.length;
+      var current = 0;
+      var visibleCount = 4;
+
+      function getSlideWidth() {
+        var wrap = track.parentElement;
+        return (wrap.offsetWidth + 3) / visibleCount;
+      }
+
+      function update() {
+        var sw = getSlideWidth();
+        track.style.transform = 'translateX(-' + (current * sw) + 'px)';
+      }
+
+      document.getElementById('hc-next').addEventListener('click', function(){
+        if (current < total - visibleCount) current++;
+        else current = 0;
+        update();
+      });
+      document.getElementById('hc-prev').addEventListener('click', function(){
+        if (current > 0) current--;
+        else current = total - visibleCount;
+        update();
+      });
+
+      window.addEventListener('resize', update);
+
+      // set track to not wrap
+      track.style.flexWrap = 'nowrap';
+    })();
 
   })();
   </script>
