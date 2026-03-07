@@ -163,77 +163,46 @@
     .footer-l { font-family: var(--helvetica); font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); }
     .footer-r { font-family: var(--helvetica); font-size:10px; font-weight:400; letter-spacing:.14em; color:rgba(15,15,13,0.3); }
 
-    /* ── HOME CAROUSEL ── */
-    .home-carousel-section {
-      flex: 1; min-height: 0; overflow: hidden; position: relative;
+    /* ── SNAKE GAME ── */
+    .snake-section {
+      flex: 1; min-height: 0; position: relative; overflow: hidden;
+      background: var(--faint);
+      border-bottom: 1px solid var(--rule);
     }
-    .hc-track-wrap {
-      height: 100%; overflow: hidden;
+    #snake-canvas {
+      display: block; width: 100%; height: 100%;
+      image-rendering: pixelated;
     }
-    .home-carousel {
-      display: flex; align-items: stretch; gap: 10px; height: 100%;
-      padding: 20px 48px;
-      will-change: transform; flex-wrap: nowrap;
-    }
-    /* inactive: narrow pill */
-    .hc-slide {
-      flex: 0 0 90px; min-width: 0;
-      position: relative; overflow: hidden; cursor: none;
-      border-radius: 60px;
-      transition: flex .65s cubic-bezier(0.76,0,0.24,1),
-                  border-radius .65s cubic-bezier(0.76,0,0.24,1);
-    }
-    /* active: expanded rectangle */
-    .hc-slide.active {
-      flex: 0 0 300px;
-      border-radius: 16px;
-    }
-    .hc-slide img {
+    .snake-overlay {
       position: absolute; inset: 0;
-      width: 100%; height: 100%; object-fit: cover; display: block;
-      filter: grayscale(50%) brightness(.75);
-      transition: filter .55s;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(238,239,234,0.82);
+      backdrop-filter: blur(4px);
+      transition: opacity .4s, visibility .4s;
     }
-    .hc-slide.active img {
-      filter: grayscale(0%) brightness(1);
+    .snake-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .snake-msg { text-align: center; }
+    .snake-title {
+      font-family: var(--display); font-weight: 300; font-size: clamp(28px,5vw,56px);
+      letter-spacing: .08em; color: var(--paper); margin-bottom: 12px;
+      text-transform: uppercase;
     }
-    /* caption: only on active */
-    .hc-caption {
-      position: absolute; bottom: 14px; left: 14px; right: 14px;
-      padding: 10px 14px 12px;
-      background: rgba(249,250,245,0.13);
-      backdrop-filter: blur(14px) saturate(1.4);
-      -webkit-backdrop-filter: blur(14px) saturate(1.4);
-      border: 1px solid rgba(249,250,245,0.2);
-      border-radius: 12px;
-      opacity: 0; transform: translateY(8px);
-      transition: opacity .35s, transform .35s;
-      pointer-events: none;
+    .snake-hint {
+      font-family: var(--helvetica); font-size: 10px; font-weight: 500;
+      letter-spacing: .2em; text-transform: uppercase; color: var(--mid);
     }
-    .hc-slide.active .hc-caption { opacity: 1; transform: translateY(0); }
-    .hc-caption-title {
-      font-family: var(--helvetica); font-size: 9px; font-weight: 700;
-      letter-spacing: .2em; text-transform: uppercase; color: #f9faf5;
-      margin-bottom: 3px;
+    .snake-score-wrap {
+      position: absolute; bottom: 20px; right: 28px;
+      display: flex; align-items: baseline; gap: 10px;
     }
-    .hc-caption-count {
-      font-family: var(--helvetica); font-size: 8px; font-weight: 400;
-      letter-spacing: .14em; color: rgba(249,250,245,.65);
+    .snake-label {
+      font-family: var(--helvetica); font-size: 9px; font-weight: 600;
+      letter-spacing: .2em; text-transform: uppercase; color: var(--mid);
     }
-    .hc-nav {
-      position: absolute; bottom: 28px; right: 60px;
-      display: flex; gap: 6px; z-index: 10;
+    .snake-score {
+      font-family: var(--display); font-weight: 300; font-size: 28px;
+      color: var(--accent); letter-spacing: -.01em; line-height: 1;
     }
-    .hc-btn {
-      width: 32px; height: 32px;
-      border: 1px solid rgba(15,15,13,0.18);
-      background: rgba(249,250,245,0.75);
-      backdrop-filter: blur(8px); border-radius: 15px;
-      color: var(--paper); font-size: 13px; display: flex; align-items: center;
-      justify-content: center; cursor: none;
-      transition: background .2s, border-color .2s, color .2s;
-    }
-    .hc-btn:hover { background: var(--accent); border-color: var(--accent); color: #f9faf5; }
 
     /* ── HOME PAGE ── */
     #page-home { height:100vh; padding-top:var(--nav-h); position:relative; overflow:hidden; display:flex; flex-direction:column; }
@@ -365,8 +334,16 @@
     .skill-cell-desc { font-family: var(--helvetica); font-size:10px; font-weight:400; color:var(--mid); margin-bottom:8px; }
     .skill-cell-yrs  { font-family: var(--helvetica); font-size:9px; font-weight:600; letter-spacing:.14em; color:var(--accent); }
 
-    .exp-section { padding:80px 0; background:var(--faint); }
-    .exp-table { width:100%; border-collapse:collapse; }
+    .exp-edu-columns { display:grid; grid-template-columns:1fr 1fr; gap:0; align-items:start; }
+    .exp-edu-col { padding:80px 48px; }
+    .exp-edu-col:first-child { border-right:1px solid var(--rule); padding-left:0; }
+    .exp-edu-col:last-child { background:var(--faint); }
+    .exp-section { padding:0; background:none; }
+    .exp-section .container { padding:0; max-width:none; }
+    .edu-section { padding:0; }
+    .edu-section .container { padding:0; max-width:none; }
+    .edu-section .eyebrow { margin-bottom:32px; }
+    .edu-grid { display:grid; grid-template-columns:1fr; gap:1px; margin-top:0; }
     .exp-row { border-bottom:1px solid var(--rule); transition:background .2s; }
     .exp-row:hover { background:rgba(15,15,13,.04); }
     .exp-period  { font-family: var(--helvetica); font-size:10px; font-weight:500; letter-spacing:.14em; color:var(--accent); padding:28px 0; width:140px; vertical-align:top; }
@@ -378,8 +355,6 @@
     .exp-body ul li::before { content:'—'; position:absolute; left:0; color:var(--accent); font-size:10px; line-height:1.8; }
     .exp-body strong { color:var(--paper); font-weight:600; }
 
-    .edu-section { padding:80px 0; }
-    .edu-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; margin-top:48px; }
     .edu-cell { padding:36px 28px; border:1px solid var(--rule); position:relative; overflow:hidden; }
     .edu-cell::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform .4s var(--ease); }
     .edu-cell:hover::before { transform:scaleX(1); }
@@ -647,57 +622,18 @@
     <!-- HOME -->
     <div class="page" id="page-home">
 
-      <!-- CAROUSEL -->
-      <div class="home-carousel-section" style="flex:1;overflow:hidden;position:relative;">
-        <div class="hc-track-wrap" style="height:100%;overflow:hidden;">
-          <div class="home-carousel" id="hc-track">
-
-            <div class="hc-slide">
-              <img src="https://framerusercontent.com/images/etTLuHagtoFBmn68f4HAzj4Rw.png" alt="Tactical Sim"/>
-              <div class="hc-caption"><div class="hc-caption-title">Tactical Sim</div><div class="hc-caption-count">Game Design</div></div>
-            </div>
-
-            <div class="hc-slide">
-              <img src="https://framerusercontent.com/images/eL8D8lEEgLlrp8CfZ6ocxqS2w.png" alt="Apple Arcade"/>
-              <div class="hc-caption"><div class="hc-caption-title">Apple Arcade</div><div class="hc-caption-count">Game Design</div></div>
-            </div>
-
-            <div class="hc-slide">
-              <img src="https://lh3.googleusercontent.com/d/1qThLVwEUOPAjJ4o3X8nmc3aYh-obn1QF" alt="Gabryel Sallehount"/>
-              <div class="hc-caption"><div class="hc-caption-title">Gabryel Sallehount</div><div class="hc-caption-count">Photography</div></div>
-            </div>
-
-            <div class="hc-slide">
-              <img src="https://framerusercontent.com/images/sD0zk6JfyhZKYSwK4wfX2ijk.jpg" alt="Royal Canin"/>
-              <div class="hc-caption"><div class="hc-caption-title">Royal Canin</div><div class="hc-caption-count">Web Design</div></div>
-            </div>
-
-            <div class="hc-slide">
-              <img src="https://framerusercontent.com/images/l9kgANX3wcoSUz7X67xfNdUpINU.jpg" alt="Aden Recollection"/>
-              <div class="hc-caption"><div class="hc-caption-title">Aden : Recollection</div><div class="hc-caption-count">Game Design</div></div>
-            </div>
-
-            <div class="hc-slide">
-              <img src="https://framerusercontent.com/images/CSvzvOYhkKEwitr677LPvj3aMgs.png" alt="Cote 780"/>
-              <div class="hc-caption"><div class="hc-caption-title">Cote 780</div><div class="hc-caption-count">Game Design</div></div>
-            </div>
-
-            <div class="hc-slide">
-              <img src="https://framerusercontent.com/images/eCFGk5Ichh91I5XNIPX65U0wVyY.png" alt="Landing Pages"/>
-              <div class="hc-caption"><div class="hc-caption-title">Landing Pages</div><div class="hc-caption-count">Web Design</div></div>
-            </div>
-
-            <div class="hc-slide">
-              <img src="https://framerusercontent.com/images/NkHNaPLwZZ58RGZYPlc4ACz0.png" alt="Journal des Abysses"/>
-              <div class="hc-caption"><div class="hc-caption-title">Journal des Abysses</div><div class="hc-caption-count">Game Jam</div></div>
-            </div>
-
+      <!-- SNAKE MINI GAME -->
+      <div class="snake-section">
+        <canvas id="snake-canvas"></canvas>
+        <div class="snake-overlay" id="snake-overlay">
+          <div class="snake-msg">
+            <div class="snake-title">— PLAY —</div>
+            <div class="snake-hint">Click or press any key to start</div>
           </div>
         </div>
-        <!-- nav arrows -->
-        <div class="hc-nav">
-          <button class="hc-btn" id="hc-prev">←</button>
-          <button class="hc-btn" id="hc-next">→</button>
+        <div class="snake-score-wrap">
+          <span class="snake-label">Score</span>
+          <span class="snake-score" id="snake-score">000</span>
         </div>
       </div>
 
@@ -851,10 +787,14 @@
         </div>
       </div>
 
-      <div class="exp-section">
-        <div class="container">
-          <div class="eyebrow">Experience</div>
-          <table class="exp-table">
+      <div class="container">
+        <div class="exp-edu-columns">
+
+          <!-- LEFT: EXPERIENCE -->
+          <div class="exp-edu-col">
+            <div class="exp-section">
+              <div class="eyebrow">Experience</div>
+              <table class="exp-table">
 
             <tr class="exp-row">
               <td class="exp-period">2025</td>
@@ -920,13 +860,14 @@
             </tr>
 
           </table>
-        </div>
-      </div>
+            </div>
+          </div>
 
-      <div class="edu-section">
-        <div class="container">
-          <div class="eyebrow">Education</div>
-          <div class="edu-grid">
+          <!-- RIGHT: EDUCATION -->
+          <div class="exp-edu-col">
+            <div class="edu-section">
+              <div class="eyebrow">Education</div>
+              <div class="edu-grid">
             <div class="edu-cell">
               <div class="edu-school">Gobelins Paris</div>
               <div class="edu-degree">Master of Arts in Interaction Design</div>
@@ -945,9 +886,12 @@
               <div class="edu-year">2018 – 2019</div>
               <div class="edu-desc">Classic graphic design principles.</div>
             </div>
-          </div>
-        </div>
-      </div>
+          </div><!-- end edu-grid -->
+            </div><!-- end edu-section -->
+          </div><!-- end exp-edu-col right -->
+
+        </div><!-- end exp-edu-columns -->
+      </div><!-- end container -->
       <footer><a class="footer-l" href="https://www.linkedin.com/in/axel-xiberras-aa0105172/" target="_blank" rel="noopener" style="text-decoration:none;">Axel Xiberras</a><span class="footer-r">© Axel Xiberras</span></footer>
     </div>
 
@@ -955,7 +899,7 @@
     <div class="page" id="page-contact">
       <div class="contact-hero">
         <div class="container">
-          <h1>Let's Build<br /><em>Something.</em></h1>
+          <h1>Let's<br /><em>Talk.</em></h1>
         </div>
       </div>
       <div class="contact-body">
@@ -965,11 +909,11 @@
               <p class="contact-left-intro">Looking to start a project or need consultation? Feel free to reach out — always open to new collaborations and interesting challenges.</p>
               <div class="contact-detail-row">
                 <span class="contact-detail-key">Email</span>
-                <span class="contact-detail-val"><a href="/cdn-cgi/l/email-protection#46273e232a3e2f2423343427357706212b272f2a6825292b"><span class="__cf_email__" data-cfemail="16776e737a6e7f7473646477652756717b777f7a3875797b">[email&#160;protected]</span></a></span>
+                <span class="contact-detail-val"><a href="mailto:axelxiberras1@gmail.com">axelxiberras1@gmail.com</a></span>
               </div>
               <div class="contact-detail-row">
-                <span class="contact-detail-key">Portfolio</span>
-                <span class="contact-detail-val"><a href="https://axelxiberras.framer.website/" target="_blank">axelxiberras.framer.website</a></span>
+                <span class="contact-detail-key">LinkedIn</span>
+                <span class="contact-detail-val"><a href="https://www.linkedin.com/in/axel-xiberras-aa0105172/" target="_blank" rel="noopener">axel-xiberras</a></span>
               </div>
             </div>
             <form id="contact-form">
@@ -1394,69 +1338,162 @@
       setTimeout(function(){ btn.innerHTML='Send Message <span class="arr">→</span>'; btn.style.background=''; form.reset(); },2500);
     });
 
-    /* CAROUSEL */
+    /* ── SNAKE GAME ── */
     (function(){
-      var track = document.getElementById('hc-track');
-      if (!track) return;
-      var slides = Array.prototype.slice.call(track.querySelectorAll('.hc-slide'));
-      var activeIdx = 0;
-      var offsetPx = 0;
-      var hoverDir = 0;
-      var rafId = null;
+      var canvas = document.getElementById('snake-canvas');
+      var overlay = document.getElementById('snake-overlay');
+      var scoreEl = document.getElementById('snake-score');
+      if (!canvas) return;
 
-      function setActive(idx) {
-        activeIdx = idx;
-        slides.forEach(function(s, i) { s.classList.toggle('active', i === idx); });
+      var ctx = canvas.getContext('2d');
+      var CELL = 20;
+      var cols, rows;
+      var snake, dir, nextDir, food, score, running, gameOver, paused;
+      var loop;
+
+      var C_BG    = '#eeefea';
+      var C_GRID  = 'rgba(15,15,13,0.04)';
+      var C_SNAKE = '#0f0f0d';
+      var C_HEAD  = '#ea5806';
+      var C_FOOD  = '#ea5806';
+
+      function resize() {
+        canvas.width  = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+        cols = Math.floor(canvas.width  / CELL);
+        rows = Math.floor(canvas.height / CELL);
+        if (!running) drawIdle();
       }
 
-      slides.forEach(function(s, i) {
-        s.addEventListener('click', function() { setActive(i); });
-      });
-
-      // hover drift scroll
-      var section = track.closest('.home-carousel-section');
-      if (section) {
-        section.addEventListener('mousemove', function(e) {
-          var r = section.getBoundingClientRect();
-          var x = e.clientX - r.left;
-          var edge = r.width * 0.22;
-          if (x < edge) hoverDir = -((edge - x) / edge) * 1.8;
-          else if (x > r.width - edge) hoverDir = ((x - (r.width - edge)) / edge) * 1.8;
-          else hoverDir = 0;
-        });
-        section.addEventListener('mouseleave', function() {
-          hoverDir = 0;
-          cancelAnimationFrame(rafId);
-          rafId = null;
-        });
-        section.addEventListener('mouseenter', function() {
-          if (rafId) return;
-          function loop() {
-            if (Math.abs(hoverDir) > 0.01) {
-              var maxScroll = track.scrollWidth - track.parentElement.offsetWidth;
-              offsetPx = Math.max(0, Math.min(offsetPx + hoverDir, maxScroll));
-              track.style.transform = 'translateX(-' + offsetPx + 'px)';
-            }
-            rafId = requestAnimationFrame(loop);
-          }
-          loop();
-        });
+      function drawIdle() {
+        ctx.fillStyle = C_BG;
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+        ctx.strokeStyle = C_GRID; ctx.lineWidth = .5;
+        for(var c=0;c<=cols;c++){ctx.beginPath();ctx.moveTo(c*CELL,0);ctx.lineTo(c*CELL,canvas.height);ctx.stroke();}
+        for(var r=0;r<=rows;r++){ctx.beginPath();ctx.moveTo(0,r*CELL);ctx.lineTo(canvas.width,r*CELL);ctx.stroke();}
       }
 
-      // button nav
-      document.getElementById('hc-next').addEventListener('click', function(){
-        var step = 110;
-        var maxScroll = track.scrollWidth - track.parentElement.offsetWidth;
-        offsetPx = Math.min(offsetPx + step, maxScroll);
-        track.style.transform = 'translateX(-' + offsetPx + 'px)';
-      });
-      document.getElementById('hc-prev').addEventListener('click', function(){
-        var step = 110;
-        offsetPx = Math.max(offsetPx - step, 0);
-        track.style.transform = 'translateX(-' + offsetPx + 'px)';
+      function rnd(max) { return Math.floor(Math.random() * max); }
+
+      function newFood() {
+        var pos;
+        do { pos = {x:rnd(cols), y:rnd(rows)}; }
+        while (snake.some(function(s){ return s.x===pos.x && s.y===pos.y; }));
+        return pos;
+      }
+
+      function init() {
+        var mx = Math.floor(cols/2), my = Math.floor(rows/2);
+        snake   = [{x:mx,y:my},{x:mx-1,y:my},{x:mx-2,y:my}];
+        dir     = {x:1,y:0};
+        nextDir = {x:1,y:0};
+        food    = newFood();
+        score   = 0;
+        running = true;
+        gameOver= false;
+        paused  = false;
+        overlay.classList.add('hidden');
+        scoreEl.textContent = '000';
+        clearInterval(loop);
+        loop = setInterval(step, 110);
+      }
+
+      function step() {
+        if (!dir) return;
+        dir = nextDir;
+        var head = {x: snake[0].x + dir.x, y: snake[0].y + dir.y};
+        head.x = (head.x + cols) % cols;
+        head.y = (head.y + rows) % rows;
+        if (snake.some(function(s){ return s.x===head.x && s.y===head.y; })) {
+          end(); return;
+        }
+        snake.unshift(head);
+        if (head.x === food.x && head.y === food.y) {
+          score++;
+          scoreEl.textContent = String(score).padStart(3,'0');
+          food = newFood();
+        } else {
+          snake.pop();
+        }
+        draw();
+      }
+
+      function draw() {
+        var w = canvas.width, h = canvas.height;
+        ctx.fillStyle = C_BG; ctx.fillRect(0,0,w,h);
+        ctx.strokeStyle = C_GRID; ctx.lineWidth = .5;
+        for(var c=0;c<=cols;c++){ctx.beginPath();ctx.moveTo(c*CELL,0);ctx.lineTo(c*CELL,h);ctx.stroke();}
+        for(var r=0;r<=rows;r++){ctx.beginPath();ctx.moveTo(0,r*CELL);ctx.lineTo(w,r*CELL);ctx.stroke();}
+        // food
+        ctx.fillStyle = C_FOOD;
+        ctx.beginPath();
+        ctx.arc(food.x*CELL+CELL/2, food.y*CELL+CELL/2, CELL/2-2, 0, Math.PI*2);
+        ctx.fill();
+        // snake
+        snake.forEach(function(s, i) {
+          ctx.fillStyle = (i===0) ? C_HEAD : C_SNAKE;
+          var pad = (i===0)?1:2, r2=(i===0)?6:4;
+          roundRect(ctx, s.x*CELL+pad, s.y*CELL+pad, CELL-pad*2, CELL-pad*2, r2);
+          ctx.fill();
+        });
+        // paused indicator
+        if (paused) {
+          ctx.fillStyle = 'rgba(238,239,234,0.7)';
+          ctx.fillRect(0,0,w,h);
+          ctx.fillStyle = '#0f0f0d';
+          ctx.font = '600 11px "Helvetica Neue", sans-serif';
+          ctx.textAlign = 'center';
+          ctx.letterSpacing = '0.2em';
+          ctx.fillText('PAUSED — CLICK TO RESUME', w/2, h/2);
+        }
+      }
+
+      function roundRect(ctx, x, y, w, h, r) {
+        ctx.beginPath();
+        ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y);
+        ctx.arcTo(x+w,y,x+w,y+r,r); ctx.lineTo(x+w,y+h-r);
+        ctx.arcTo(x+w,y+h,x+w-r,y+h,r); ctx.lineTo(x+r,y+h);
+        ctx.arcTo(x,y+h,x,y+h-r,r); ctx.lineTo(x,y+r);
+        ctx.arcTo(x,y,x+r,y,r); ctx.closePath();
+      }
+
+      function togglePause() {
+        if (!running || gameOver) return;
+        paused = !paused;
+        if (paused) { clearInterval(loop); draw(); }
+        else { loop = setInterval(step, 110); }
+      }
+
+      function end() {
+        clearInterval(loop);
+        running = false; gameOver = true;
+        overlay.classList.remove('hidden');
+        overlay.querySelector('.snake-title').textContent = score > 0 ? '— ' + score + ' pts —' : '— GAME OVER —';
+        overlay.querySelector('.snake-hint').textContent = 'Click or press any key to restart';
+      }
+
+      // canvas click = pause/resume during game
+      canvas.addEventListener('click', function() {
+        if (!running || gameOver) return;
+        togglePause();
       });
 
-      setActive(0);
+      // overlay click = start/restart
+      overlay.addEventListener('click', function() { init(); });
+
+      // keyboard
+      var KEYS = {ArrowUp:{x:0,y:-1},ArrowDown:{x:0,y:1},ArrowLeft:{x:-1,y:0},ArrowRight:{x:1,y:0},
+                  w:{x:0,y:-1},s:{x:0,y:1},a:{x:-1,y:0},d:{x:1,y:0}};
+      document.addEventListener('keydown', function(e){
+        if (gameOver || !running) { init(); return; }
+        if (e.key === ' ') { togglePause(); e.preventDefault(); return; }
+        if (paused) return;
+        var d = KEYS[e.key];
+        if (d && dir && !(d.x===-dir.x && d.y===-dir.y)) { nextDir=d; e.preventDefault(); }
+      });
+
+      window.addEventListener('resize', resize);
+      resize();
     })();
 
   })();
