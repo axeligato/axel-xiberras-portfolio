@@ -327,41 +327,84 @@
     .quote-wrap blockquote { font-family: var(--helvetica); font-style:italic; font-weight:300; font-size:clamp(16px,1.6vw,22px); color:var(--paper); line-height:1.5; margin-bottom:10px; }
     .quote-wrap cite { font-family: var(--helvetica); font-size:10px; font-weight:500; letter-spacing:.14em; color:var(--mid); font-style:normal; }
 
-    .skills-label { font-family: var(--helvetica); font-size:10px; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--accent); margin-bottom:20px; padding-top:48px; border-top:1px solid var(--rule); }
+    .skills-label { font-family: var(--helvetica); font-size:10px; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--accent); margin-bottom:20px; }
     .skills-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; }
     .skill-cell { padding:18px 20px; background:var(--faint); border:1px solid var(--rule); }
     .skill-cell-name { font-family: var(--helvetica); font-size:13px; font-weight:600; color:var(--paper); margin-bottom:3px; }
     .skill-cell-desc { font-family: var(--helvetica); font-size:10px; font-weight:400; color:var(--mid); margin-bottom:8px; }
     .skill-cell-yrs  { font-family: var(--helvetica); font-size:9px; font-weight:600; letter-spacing:.14em; color:var(--accent); }
 
-    .exp-edu-columns { display:grid; grid-template-columns:1fr 1fr; gap:0; align-items:start; }
-    .exp-edu-col { padding:80px 48px; }
-    .exp-edu-col:first-child { border-right:1px solid var(--rule); padding-left:0; }
-    .exp-edu-col:last-child { background:var(--faint); }
-    .exp-section { padding:0; background:none; }
-    .exp-section .container { padding:0; max-width:none; }
-    .edu-section { padding:0; }
-    .edu-section .container { padding:0; max-width:none; }
-    .edu-section .eyebrow { margin-bottom:32px; }
+    /* Skills + Education side by side */
+    .skills-edu-row { display:grid; grid-template-columns:1fr 1fr; border-top:1px solid var(--rule); }
+    .skills-edu-pane { padding:56px 48px; }
+    .skills-edu-pane:first-child { border-right:1px solid var(--rule); }
+    .skills-edu-pane:last-child { background:var(--faint); }
     .edu-grid { display:grid; grid-template-columns:1fr; gap:1px; margin-top:0; }
-    .exp-row { border-bottom:1px solid var(--rule); transition:background .2s; }
-    .exp-row:hover { background:rgba(15,15,13,.04); }
-    .exp-period  { font-family: var(--helvetica); font-size:10px; font-weight:500; letter-spacing:.14em; color:var(--accent); padding:28px 0; width:140px; vertical-align:top; }
-    .exp-role    { font-family: var(--helvetica); font-size:18px; font-weight:600; color:var(--paper); padding:28px 24px; vertical-align:top; }
-    .exp-company { font-family: var(--helvetica); font-size:10px; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:var(--mid); padding:28px 24px; vertical-align:top; width:200px; }
-    .exp-body    { font-family: var(--helvetica); font-size:11px; font-weight:400; color:var(--mid); line-height:1.8; padding:28px 0 28px 24px; vertical-align:top; }
-    .exp-body ul { margin-top:8px; padding-left:14px; list-style:none; }
-    .exp-body ul li { position:relative; padding-left:12px; margin-bottom:4px; }
-    .exp-body ul li::before { content:'—'; position:absolute; left:0; color:var(--accent); font-size:10px; line-height:1.8; }
-    .exp-body strong { color:var(--paper); font-weight:600; }
-
-    .edu-cell { padding:36px 28px; border:1px solid var(--rule); position:relative; overflow:hidden; }
-    .edu-cell::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform .4s var(--ease); }
-    .edu-cell:hover::before { transform:scaleX(1); }
-    .edu-school  { font-family: var(--helvetica); font-size:9px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:var(--accent); margin-bottom:16px; }
-    .edu-degree  { font-family: var(--helvetica); font-size:15px; font-weight:600; color:var(--paper); line-height:1.3; margin-bottom:8px; }
-    .edu-year    { font-family: var(--helvetica); font-size:10px; font-weight:400; color:var(--mid); margin-bottom:16px; }
+    .edu-cell { padding:28px 0; border-bottom:1px solid var(--rule); position:relative; }
+    .edu-cell:last-child { border-bottom:none; }
+    .edu-school  { font-family: var(--helvetica); font-size:9px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:var(--accent); margin-bottom:10px; }
+    .edu-degree  { font-family: var(--helvetica); font-size:14px; font-weight:600; color:var(--paper); line-height:1.3; margin-bottom:6px; }
+    .edu-year    { font-family: var(--helvetica); font-size:10px; font-weight:400; color:var(--mid); margin-bottom:10px; }
     .edu-desc    { font-family: var(--helvetica); font-size:11px; font-weight:400; color:var(--mid); line-height:1.7; }
+
+    /* Interactive Timeline */
+    .timeline-section { padding:80px 0; border-top:1px solid var(--rule); }
+    .timeline-wrap { position:relative; padding-left:48px; }
+    /* vertical line */
+    .timeline-wrap::before {
+      content:''; position:absolute; left:48px; top:0; bottom:0;
+      width:1px; background:var(--rule);
+    }
+    .tl-item { position:relative; padding:0 0 0 40px; margin-bottom:0; cursor:none; }
+    /* dot on line */
+    .tl-dot {
+      position:absolute; left:-5px; top:24px;
+      width:10px; height:10px; border-radius:50%;
+      background:var(--ink); border:2px solid var(--mid);
+      transition:background .25s, border-color .25s, transform .25s;
+      z-index:1;
+    }
+    .tl-item.open .tl-dot { background:var(--accent); border-color:var(--accent); transform:scale(1.3); }
+    .tl-header {
+      display:flex; align-items:baseline; gap:20px; flex-wrap:wrap;
+      padding:20px 0; border-bottom:1px solid var(--rule);
+      transition:border-color .2s;
+      user-select:none; cursor:none;
+    }
+    .tl-header:hover .tl-role { color:var(--accent); }
+    .tl-item.open .tl-header { border-color:var(--accent); }
+    .tl-period {
+      font-family: var(--helvetica); font-size:10px; font-weight:500;
+      letter-spacing:.14em; color:var(--accent); min-width:90px; flex-shrink:0;
+    }
+    .tl-role {
+      font-family: var(--helvetica); font-size:16px; font-weight:600; color:var(--paper);
+      flex:1;
+    }
+    .tl-company {
+      font-family: var(--helvetica); font-size:10px; font-weight:500;
+      letter-spacing:.12em; text-transform:uppercase; color:var(--mid);
+    }
+    .tl-chevron {
+      font-family: var(--helvetica); font-size:11px; color:var(--mid);
+      margin-left:auto; transition:transform .3s var(--ease), color .2s;
+      flex-shrink:0;
+    }
+    .tl-item.open .tl-chevron { transform:rotate(180deg); color:var(--accent); }
+    .tl-body {
+      max-height:0; overflow:hidden;
+      transition:max-height .45s cubic-bezier(0.76,0,0.24,1), padding .3s;
+      padding:0 0 0 0;
+    }
+    .tl-item.open .tl-body { max-height:1000px; padding:20px 0 24px; }
+    .tl-body-inner {
+      font-family: var(--helvetica); font-size:11px; font-weight:400;
+      color:var(--mid); line-height:1.85;
+    }
+    .tl-body-inner ul { margin-top:10px; padding-left:0; list-style:none; }
+    .tl-body-inner ul li { position:relative; padding-left:16px; margin-bottom:6px; }
+    .tl-body-inner ul li::before { content:'—'; position:absolute; left:0; color:var(--accent); }
+    .tl-body-inner strong { color:var(--paper); font-weight:600; }
 
     /* ── CONTACT ── */
     #page-contact { padding-top:var(--nav-h); }
@@ -773,101 +816,16 @@
                 <a class="game-tag" href="https://en.wikipedia.org/wiki/Smallville_(TV_series)" target="_blank" rel="noopener">⚡ Smallville</a>
                 <a class="game-tag" href="https://en.wikipedia.org/wiki/Nightwing" target="_blank" rel="noopener">🦇 Nightwing</a>
               </div>
-              <div class="skills-label">Tools & Skills</div>
-              <div class="skills-grid">
-                <div class="skill-cell"><div class="skill-cell-name">Figma</div><div class="skill-cell-desc">User interface design</div><div class="skill-cell-yrs">7 yrs</div></div>
-                <div class="skill-cell"><div class="skill-cell-name">Adobe Suite</div><div class="skill-cell-desc">Graphic software</div><div class="skill-cell-yrs">7 yrs</div></div>
-                <div class="skill-cell"><div class="skill-cell-name">Blender</div><div class="skill-cell-desc">3D Modeling</div><div class="skill-cell-yrs">5 yrs</div></div>
-                <div class="skill-cell"><div class="skill-cell-name">Framer / WIX</div><div class="skill-cell-desc">No-code builder</div><div class="skill-cell-yrs">3 yrs</div></div>
-                <div class="skill-cell"><div class="skill-cell-name">Unreal Engine</div><div class="skill-cell-desc">Real-time game engine</div><div class="skill-cell-yrs">2 yrs</div></div>
-                <div class="skill-cell"><div class="skill-cell-name">Notion</div><div class="skill-cell-desc">Note taking & planning</div><div class="skill-cell-yrs">4 yrs</div></div>
-              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="container">
-        <div class="exp-edu-columns">
-
-          <!-- LEFT: EXPERIENCE -->
-          <div class="exp-edu-col">
-            <div class="exp-section">
-              <div class="eyebrow">Experience</div>
-              <table class="exp-table">
-
-            <tr class="exp-row">
-              <td class="exp-period">2025</td>
-              <td class="exp-role">UX/UI Designer</td>
-              <td class="exp-company">Gameloft Paris</td>
-              <td class="exp-body">
-                Contributed to the UX and UI design of an upcoming Apple Arcade title across mobile, desktop, and Apple TV, from early feature exploration to beta release.
-                <ul>
-                  <li>Created wireframes, mockups, and interactive flows for multiple game modes and menu systems.</li>
-                  <li>Collaborated with gameplay designers and developers to ensure interface consistency and responsiveness across platforms.</li>
-                  <li>Participated in cross-platform UX optimization, ensuring visual clarity and input coherence between touch, controller, and remote navigation.</li>
-                </ul>
-              </td>
-            </tr>
-
-            <tr class="exp-row">
-              <td class="exp-period">2025 – Now</td>
-              <td class="exp-role">Freelance Product Designer</td>
-              <td class="exp-company">Independent</td>
-              <td class="exp-body">Missions in product design for rebranding and building various sites for clients.</td>
-            </tr>
-
-            <tr class="exp-row">
-              <td class="exp-period">2022 – 2024</td>
-              <td class="exp-role">UX/UI Designer</td>
-              <td class="exp-company">French Ministry of Economy and Finances</td>
-              <td class="exp-body">Led and collaborated on internal digital projects to enhance public services. Designed user interfaces and improved user journeys in partnership with developers and data scientists, focusing on accessibility and clarity for a wide audience.</td>
-            </tr>
-
-            <tr class="exp-row">
-              <td class="exp-period">2019 – 2021</td>
-              <td class="exp-role">UX/UI & Web Designer</td>
-              <td class="exp-company">Fullsix</td>
-              <td class="exp-body">Worked across digital campaigns and platforms for major clients including Disney, Royal Canin, RATP, and Disneyland Paris. Designed responsive web interfaces, participated in UX research, and contributed to brand-consistent digital experiences.</td>
-            </tr>
-
-            <tr class="exp-row">
-              <td class="exp-period">2015</td>
-              <td class="exp-role">Junior UX/UI Designer</td>
-              <td class="exp-company">Ubisoft Paris</td>
-              <td class="exp-body">
-                Supported UX and UI development for Far Cry Primal and Tom Clancy's The Division, collaborating closely with senior designers and developers.
-                <ul>
-                  <li>Assisted in interface layout design, usability testing, and wireframing gameplay systems.</li>
-                  <li>Learned and applied AAA production pipelines, including version control, documentation, and design review workflows.</li>
-                  <li>Strengthened ability to translate complex gameplay data into intuitive user flows and clear player feedback systems.</li>
-                </ul>
-              </td>
-            </tr>
-
-            <tr class="exp-row">
-              <td class="exp-period">2020 – 2024</td>
-              <td class="exp-role">UX/UI · Game · Narrative · 3D Designer</td>
-              <td class="exp-company">Gobelins Paris</td>
-              <td class="exp-body">
-                Independent &amp; academic shipped projects.
-                <ul>
-                  <li><strong>Aden</strong> — First-person parkour game prototype (Bachelor project). Designed and implemented core interface elements (HUD, menus, interaction prompts) focusing on player flow, diegetic feedback, and motion clarity.</li>
-                  <li><strong>Journal from the Abyss</strong> (Global Game Jam) — Designed UI mockups and UX flow for an experimental puzzle game, collaborating with programmers and artists to ship a playable prototype within 48 hours. Focused on readability, challenge pacing, and a minimalist aesthetic to reinforce player problem-solving immersion.</li>
-                  <li><strong>Deep Dive</strong> — Interactive exhibition exploring the experience of olympic swimmers through motion detection technology that reflects the user's steps to audio and visual feedback through different phases of the competition, using TouchDesigner.</li>
-                </ul>
-              </td>
-            </tr>
-
-          </table>
-            </div>
-          </div>
-
-          <!-- RIGHT: EDUCATION -->
-          <div class="exp-edu-col">
-            <div class="edu-section">
-              <div class="eyebrow">Education</div>
-              <div class="edu-grid">
+      <!-- EDUCATION + SKILLS ROW -->
+      <div class="skills-edu-row">
+        <div class="skills-edu-pane">
+          <div class="eyebrow">Education</div>
+          <div class="edu-grid">
             <div class="edu-cell">
               <div class="edu-school">Gobelins Paris</div>
               <div class="edu-degree">Master of Arts in Interaction Design</div>
@@ -886,12 +844,123 @@
               <div class="edu-year">2018 – 2019</div>
               <div class="edu-desc">Classic graphic design principles.</div>
             </div>
-          </div><!-- end edu-grid -->
-            </div><!-- end edu-section -->
-          </div><!-- end exp-edu-col right -->
+          </div><!-- edu-grid -->
+        </div><!-- skills-edu-pane left (edu) -->
+        <div class="skills-edu-pane">
+          <div class="eyebrow">Tools &amp; Skills</div>
+          <div class="skills-grid">
+            <div class="skill-cell"><div class="skill-cell-name">Figma</div><div class="skill-cell-desc">User interface design</div><div class="skill-cell-yrs">7 yrs</div></div>
+            <div class="skill-cell"><div class="skill-cell-name">Adobe Suite</div><div class="skill-cell-desc">Graphic software</div><div class="skill-cell-yrs">7 yrs</div></div>
+            <div class="skill-cell"><div class="skill-cell-name">Blender</div><div class="skill-cell-desc">3D Modeling</div><div class="skill-cell-yrs">5 yrs</div></div>
+            <div class="skill-cell"><div class="skill-cell-name">Framer / WIX</div><div class="skill-cell-desc">No-code builder</div><div class="skill-cell-yrs">3 yrs</div></div>
+            <div class="skill-cell"><div class="skill-cell-name">Unreal Engine</div><div class="skill-cell-desc">Real-time game engine</div><div class="skill-cell-yrs">2 yrs</div></div>
+            <div class="skill-cell"><div class="skill-cell-name">Notion</div><div class="skill-cell-desc">Note taking & planning</div><div class="skill-cell-yrs">4 yrs</div></div>
+          </div>
+        </div><!-- skills-edu-pane right (skills) -->
+      </div><!-- skills-edu-row -->
 
-        </div><!-- end exp-edu-columns -->
-      </div><!-- end container -->
+      <!-- INTERACTIVE TIMELINE -->
+      <div class="timeline-section">
+        <div class="container">
+          <div class="eyebrow">Experience</div>
+          <div class="timeline-wrap">
+
+            <div class="tl-item open">
+              <div class="tl-dot"></div>
+              <div class="tl-header">
+                <span class="tl-period">2025</span>
+                <span class="tl-role">UX/UI Designer</span>
+                <span class="tl-company">Gameloft Paris</span>
+                <span class="tl-chevron">↓</span>
+              </div>
+              <div class="tl-body"><div class="tl-body-inner">
+                Contributed to the UX and UI design of an upcoming Apple Arcade title across mobile, desktop, and Apple TV, from early feature exploration to beta release.
+                <ul>
+                  <li>Created wireframes, mockups, and interactive flows for multiple game modes and menu systems.</li>
+                  <li>Collaborated with gameplay designers and developers to ensure interface consistency and responsiveness across platforms.</li>
+                  <li>Participated in cross-platform UX optimization, ensuring visual clarity and input coherence between touch, controller, and remote navigation.</li>
+                </ul>
+              </div></div>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-header">
+                <span class="tl-period">2025 – Now</span>
+                <span class="tl-role">Freelance Product Designer</span>
+                <span class="tl-company">Independent</span>
+                <span class="tl-chevron">↓</span>
+              </div>
+              <div class="tl-body"><div class="tl-body-inner">
+                Missions in product design for rebranding and building various sites for clients.
+              </div></div>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-header">
+                <span class="tl-period">2022 – 2024</span>
+                <span class="tl-role">UX/UI Designer</span>
+                <span class="tl-company">French Ministry of Economy and Finances</span>
+                <span class="tl-chevron">↓</span>
+              </div>
+              <div class="tl-body"><div class="tl-body-inner">
+                Led and collaborated on internal digital projects to enhance public services. Designed user interfaces and improved user journeys in partnership with developers and data scientists, focusing on accessibility and clarity for a wide audience.
+              </div></div>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-header">
+                <span class="tl-period">2019 – 2021</span>
+                <span class="tl-role">UX/UI &amp; Web Designer</span>
+                <span class="tl-company">Fullsix</span>
+                <span class="tl-chevron">↓</span>
+              </div>
+              <div class="tl-body"><div class="tl-body-inner">
+                Worked across digital campaigns and platforms for major clients including Disney, Royal Canin, RATP, and Disneyland Paris. Designed responsive web interfaces, participated in UX research, and contributed to brand-consistent digital experiences.
+              </div></div>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-header">
+                <span class="tl-period">2020 – 2024</span>
+                <span class="tl-role">UX/UI · Game · Narrative · 3D Designer</span>
+                <span class="tl-company">Gobelins Paris</span>
+                <span class="tl-chevron">↓</span>
+              </div>
+              <div class="tl-body"><div class="tl-body-inner">
+                Independent &amp; academic shipped projects.
+                <ul>
+                  <li><strong>Aden</strong> — First-person parkour game prototype (Bachelor project). Designed and implemented core interface elements (HUD, menus, interaction prompts) focusing on player flow, diegetic feedback, and motion clarity.</li>
+                  <li><strong>Journal from the Abyss</strong> (Global Game Jam) — Designed UI mockups and UX flow for an experimental puzzle game, collaborating with programmers and artists to ship a playable prototype within 48 hours. Focused on readability, challenge pacing, and a minimalist aesthetic to reinforce player problem-solving immersion.</li>
+                  <li><strong>Deep Dive</strong> — Interactive exhibition exploring the experience of olympic swimmers through motion detection technology that reflects the user's steps to audio and visual feedback through different phases of the competition, using TouchDesigner.</li>
+                </ul>
+              </div></div>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-header">
+                <span class="tl-period">2015</span>
+                <span class="tl-role">Junior UX/UI Designer</span>
+                <span class="tl-company">Ubisoft Paris</span>
+                <span class="tl-chevron">↓</span>
+              </div>
+              <div class="tl-body"><div class="tl-body-inner">
+                Supported UX and UI development for Far Cry Primal and Tom Clancy's The Division, collaborating closely with senior designers and developers.
+                <ul>
+                  <li>Assisted in interface layout design, usability testing, and wireframing gameplay systems.</li>
+                  <li>Learned and applied AAA production pipelines, including version control, documentation, and design review workflows.</li>
+                  <li>Strengthened ability to translate complex gameplay data into intuitive user flows and clear player feedback systems.</li>
+                </ul>
+              </div></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
       <footer><a class="footer-l" href="https://www.linkedin.com/in/axel-xiberras-aa0105172/" target="_blank" rel="noopener" style="text-decoration:none;">Axel Xiberras</a><span class="footer-r">© Axel Xiberras</span></footer>
     </div>
 
@@ -958,7 +1027,7 @@
     </div>
   </div>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
   (function(){
 
     /* ── PROJECT DATA ───────────────────────── */
@@ -1295,6 +1364,16 @@
     }
 
     window.addEventListener('hashchange',routeFromHash);
+
+    /* TIMELINE ACCORDION */
+    document.querySelectorAll('.tl-header').forEach(function(header) {
+      header.addEventListener('click', function() {
+        var item = header.closest('.tl-item');
+        var isOpen = item.classList.contains('open');
+        document.querySelectorAll('.tl-item').forEach(function(i) { i.classList.remove('open'); });
+        if (!isOpen) item.classList.add('open');
+      });
+    });
 
     /* CLICKS */
     document.addEventListener('click',function(e){
